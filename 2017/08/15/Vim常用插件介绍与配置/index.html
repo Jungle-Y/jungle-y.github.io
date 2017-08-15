@@ -16,7 +16,7 @@
 <meta property="og:description" content="前言12学习、总结，交流，进步！插件与脚本使得VIM强大，毋庸置疑！ 全程参考: 所需及所获:像使用IDE一样vim其余参考将会在文中相关部分列出。文中内容如有错误，请指正！原创，转载请注明出处！  ReadyVIM装请自行搞定。版本7.5+ 。请检查用户目录下是否存在: .vim/文件夹和.vimrc用户配置文件，可以使用命令 ls -l ~ 查看。.vim/文件夹用于存放后续所有插件。.vim">
 <meta property="og:image" content="https://github.com/jungleeee/vim/blob/master/pic/1_solarized.png">
 <meta property="og:image" content="https://github.com/jungleeee/vim/blob/master/pic/2_indentLine.png">
-<meta property="og:updated_time" content="2017-08-15T08:27:03.013Z">
+<meta property="og:updated_time" content="2017-08-15T09:25:17.452Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vim 常用插件配置">
 <meta name="twitter:description" content="前言12学习、总结，交流，进步！插件与脚本使得VIM强大，毋庸置疑！ 全程参考: 所需及所获:像使用IDE一样vim其余参考将会在文中相关部分列出。文中内容如有错误，请指正！原创，转载请注明出处！  ReadyVIM装请自行搞定。版本7.5+ 。请检查用户目录下是否存在: .vim/文件夹和.vimrc用户配置文件，可以使用命令 ls -l ~ 查看。.vim/文件夹用于存放后续所有插件。.vim">
@@ -153,7 +153,7 @@
 
         
         <a href="/2017/08/15/Vim常用插件介绍与配置/" class="archive-article-date">
-  	<time datetime="2017-08-15T08:27:03.049Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-15</time>
+  	<time datetime="2017-08-15T09:25:17.452Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-15</time>
 </a>
         
       </header>
@@ -164,8 +164,7 @@
 <p>全程参考:<a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external"> 所需及所获:像使用IDE一样vim</a><br>其余参考将会在文中相关部分列出。<br>文中内容如有错误，请指正！<br>原创，转载请注明出处！</p>
 <hr>
 <h3 id="Ready"><a href="#Ready" class="headerlink" title="Ready"></a>Ready</h3><p>VIM装请自行搞定。版本7.5+ 。<br>请检查用户目录下是否存在: <code>.vim/</code>文件夹和<code>.vimrc</code>用户配置文件，可以使用命令 <code>ls -l ~</code> 查看。<br><code>.vim/</code>文件夹用于存放后续所有插件。<br><code>.vimrc</code>用于配置VIM功能，包括基本语法、插件配置以及部分脚本等。<br>如果没有请自行创建。</p>
-<hr>
-<h3 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h3><p>可以直接添加到<code>.vimrc</code>文件中:</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h3 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h3><p>可以直接添加到<code>.vimrc</code>文件中:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&quot; General set</div><div class="line">    &quot; .vimrc 文件保存后自动生效</div><div class="line">    autocmd! bufwritepost .vimrc source %   &quot; linux</div><div class="line">    &quot;let g:mapleader=&quot;;&quot;            &quot; vim 前缀键设置，默认为: \</div><div class="line">    set autowrite                   &quot; auto save file</div><div class="line">    set nobackup                    &quot; 不产生临时文件</div><div class="line">    set noswapfile                  &quot; 不产生临时文件</div><div class="line">    &quot;set t_ti= t_te=                 &quot; 退出VIM时，将当前屏幕内容显示到终端屏幕上</div><div class="line"></div><div class="line">    &quot; 不使用鼠标，方向键。实测插入模式中还是可以使用</div><div class="line">    &quot;set mouse-=a</div><div class="line">    &quot;map &lt;Left&gt;  &lt;Nop&gt;</div><div class="line">    &quot;map &lt;Right&gt; &lt;Nop&gt;</div><div class="line">    &quot;map &lt;Up&gt;    &lt;Nop&gt;</div><div class="line">    &quot;map &lt;Down&gt;  &lt;Nop&gt;</div><div class="line"></div><div class="line">    &quot; 普通模式时使用ctrl+h/j/k/l 实现多文件编辑时窗口切换</div><div class="line">    nnoremap &lt;C-j&gt; &lt;C-W&gt;j</div><div class="line">    nnoremap &lt;C-k&gt; &lt;C-W&gt;k</div><div class="line">    nnoremap &lt;C-h&gt; &lt;C-W&gt;h</div><div class="line">    nnoremap &lt;C-l&gt; &lt;C-W&gt;l</div><div class="line"></div><div class="line">    &quot; 插入模式时使用ctrl+h/j/k/l 实现光标移动</div><div class="line">    inoremap &lt;C-j&gt; &lt;Down&gt;</div><div class="line">    inoremap &lt;C-k&gt; &lt;Up&gt;</div><div class="line">    inoremap &lt;C-h&gt; &lt;Left&gt;</div><div class="line">    inoremap &lt;C-l&gt; &lt;Right&gt;</div></pre></td></tr></table></figure>
 <hr>
 <h3 id="插件管理"><a href="#插件管理" class="headerlink" title="插件管理"></a>插件管理</h3><p><a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="external">Vundle</a>是一个行之有效的插件，接管<code>.vim/</code>文件夹，为每一个插件指定唯一目录。更清晰、明了。<br><a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="external">Vundle</a>会接管<code>.vim/</code>文件夹下的所有目录，所以先清空。在通过命令安装Vundle:</p>
