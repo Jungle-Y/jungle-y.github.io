@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https:/jungleeee.github.io.git">
   <title>vim 常用插件配置 | Jungle&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Author      : Jungle Creat Time  : 2017/8/3 Mail        : yjxxx168@qq.com Last Change :  前言12学习、总结，交流，进步！插件与脚本使得VIM强大，毋庸置疑！ 全程参考: 所需及所获:像使用IDE一样vim其余参考将会在文中相关部分列出。文中内容如有错误，请指正！原创，转载请注明出处！  ReadyVIM装请">
+  <meta name="description" content="前言12学习、总结，交流，进步！插件与脚本使得VIM强大，毋庸置疑！ 全程参考: 所需及所获:像使用IDE一样vim其余参考将会在文中相关部分列出。文中内容如有错误，请指正！原创，转载请注明出处！  ReadyVIM装请自行搞定。版本7.5+ 。请检查用户目录下是否存在: .vim/文件夹和.vimrc用户配置文件，可以使用命令 ls -l ~ 查看。.vim/文件夹用于存放后续所有插件。.vim">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vim 常用插件配置">
 <meta property="og:url" content="https:/jungleeee.github.io.git/2017/08/15/Vim常用插件介绍与配置/index.html">
 <meta property="og:site_name" content="Jungle&#39;s Blog">
-<meta property="og:description" content="Author      : Jungle Creat Time  : 2017/8/3 Mail        : yjxxx168@qq.com Last Change :  前言12学习、总结，交流，进步！插件与脚本使得VIM强大，毋庸置疑！ 全程参考: 所需及所获:像使用IDE一样vim其余参考将会在文中相关部分列出。文中内容如有错误，请指正！原创，转载请注明出处！  ReadyVIM装请">
+<meta property="og:description" content="前言12学习、总结，交流，进步！插件与脚本使得VIM强大，毋庸置疑！ 全程参考: 所需及所获:像使用IDE一样vim其余参考将会在文中相关部分列出。文中内容如有错误，请指正！原创，转载请注明出处！  ReadyVIM装请自行搞定。版本7.5+ 。请检查用户目录下是否存在: .vim/文件夹和.vimrc用户配置文件，可以使用命令 ls -l ~ 查看。.vim/文件夹用于存放后续所有插件。.vim">
 <meta property="og:image" content="https://github.com/jungleeee/vim/blob/master/pic/1_solarized.png">
 <meta property="og:image" content="https://github.com/jungleeee/vim/blob/master/pic/2_indentLine.png">
-<meta property="og:updated_time" content="2017-08-15T08:12:43.228Z">
+<meta property="og:updated_time" content="2017-08-15T08:27:03.013Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vim 常用插件配置">
-<meta name="twitter:description" content="Author      : Jungle Creat Time  : 2017/8/3 Mail        : yjxxx168@qq.com Last Change :  前言12学习、总结，交流，进步！插件与脚本使得VIM强大，毋庸置疑！ 全程参考: 所需及所获:像使用IDE一样vim其余参考将会在文中相关部分列出。文中内容如有错误，请指正！原创，转载请注明出处！  ReadyVIM装请">
+<meta name="twitter:description" content="前言12学习、总结，交流，进步！插件与脚本使得VIM强大，毋庸置疑！ 全程参考: 所需及所获:像使用IDE一样vim其余参考将会在文中相关部分列出。文中内容如有错误，请指正！原创，转载请注明出处！  ReadyVIM装请自行搞定。版本7.5+ 。请检查用户目录下是否存在: .vim/文件夹和.vimrc用户配置文件，可以使用命令 ls -l ~ 查看。.vim/文件夹用于存放后续所有插件。.vim">
 <meta name="twitter:image" content="https://github.com/jungleeee/vim/blob/master/pic/1_solarized.png">
   
     <link rel="alternative" href="/atom.xml" title="Jungle&#39;s Blog" type="application/atom+xml">
@@ -153,20 +153,14 @@
 
         
         <a href="/2017/08/15/Vim常用插件介绍与配置/" class="archive-article-date">
-  	<time datetime="2017-08-15T08:12:43.232Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-15</time>
+  	<time datetime="2017-08-15T08:27:03.049Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<pre><code>Author      : Jungle
-Creat Time  : 2017/8/3
-Mail        : yjxxx168@qq.com
-Last Change :
-</code></pre><hr>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">学习、总结，交流，进步！</div><div class="line">插件与脚本使得VIM强大，毋庸置疑！</div></pre></td></tr></table></figure>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">学习、总结，交流，进步！</div><div class="line">插件与脚本使得VIM强大，毋庸置疑！</div></pre></td></tr></table></figure>
 <p>全程参考:<a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external"> 所需及所获:像使用IDE一样vim</a><br>其余参考将会在文中相关部分列出。<br>文中内容如有错误，请指正！<br>原创，转载请注明出处！</p>
 <hr>
 <h3 id="Ready"><a href="#Ready" class="headerlink" title="Ready"></a>Ready</h3><p>VIM装请自行搞定。版本7.5+ 。<br>请检查用户目录下是否存在: <code>.vim/</code>文件夹和<code>.vimrc</code>用户配置文件，可以使用命令 <code>ls -l ~</code> 查看。<br><code>.vim/</code>文件夹用于存放后续所有插件。<br><code>.vimrc</code>用于配置VIM功能，包括基本语法、插件配置以及部分脚本等。<br>如果没有请自行创建。</p>
