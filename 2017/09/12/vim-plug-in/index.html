@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="https:/jungleeee.github.io.git">
+  <title>vim 常用插件配置 | Jungle&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言12学习、总结，交流，进步！插件与脚本使得VIM强大，毋庸置疑！ 全程参考: 所需及所获:像使用IDE一样vim其余参考将会在文中相关部分列出。文中内容如有错误，请指正！原创，转载请注明出处！  ReadyVIM的安转请自行进行。版本最好在7.5以上。请检查用户目录下是否存在: .vim/文件夹和.vimrc用户配置文件，可以使用命令 ls -l ~ 查看。.vim/文件夹用于存放后续所有插件">
+<meta name="keywords" content="vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim 常用插件配置">
+<meta property="og:url" content="https:/jungleeee.github.io.git/2017/09/12/vim-plug-in/index.html">
+<meta property="og:site_name" content="Jungle&#39;s Blog">
+<meta property="og:description" content="前言12学习、总结，交流，进步！插件与脚本使得VIM强大，毋庸置疑！ 全程参考: 所需及所获:像使用IDE一样vim其余参考将会在文中相关部分列出。文中内容如有错误，请指正！原创，转载请注明出处！  ReadyVIM的安转请自行进行。版本最好在7.5以上。请检查用户目录下是否存在: .vim/文件夹和.vimrc用户配置文件，可以使用命令 ls -l ~ 查看。.vim/文件夹用于存放后续所有插件">
+<meta property="og:image" content="https://github.com/jungleeee/vim/blob/master/pic/1_solarized.png">
+<meta property="og:image" content="https://github.com/jungleeee/vim/blob/master/pic/2_indentLine.png">
+<meta property="og:updated_time" content="2017-09-12T08:13:53.918Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vim 常用插件配置">
+<meta name="twitter:description" content="前言12学习、总结，交流，进步！插件与脚本使得VIM强大，毋庸置疑！ 全程参考: 所需及所获:像使用IDE一样vim其余参考将会在文中相关部分列出。文中内容如有错误，请指正！原创，转载请注明出处！  ReadyVIM的安转请自行进行。版本最好在7.5以上。请检查用户目录下是否存在: .vim/文件夹和.vimrc用户配置文件，可以使用命令 ls -l ~ 查看。.vim/文件夹用于存放后续所有插件">
+<meta name="twitter:image" content="https://github.com/jungleeee/vim/blob/master/pic/1_solarized.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Jungle&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/common/favicon.png">
+  
+  <link rel="stylesheet" type="text/css" href="/main.68ab53.css">
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #f4a460"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/img/common/avatar.png" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Jungle</a></h1>
+		</hgroup>
+		
+		<p class="header-subtitle">I will, I not.</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">文章</a>
+    			
+            
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="http://github.com/jungleeee" title="github"><i class="icon-github"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #f4a460"></div>
+	<div class="btnctn js-mobile-btnctn">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/img/common/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">Jungle</h1>
+			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>I will, I not.<i class="icon icon-quo-right"></i></p>
+			
+			
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/jungleeee" title="github"><i class="icon-github"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 50%">
+				
+				
+					<li style="width: 100%"><a href="/">主页</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-vim-plug-in" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vim 常用插件配置
+    </h1>
+  
+
+        
+        <a href="/2017/09/12/vim-plug-in/" class="archive-article-date">
+  	<time datetime="2017-09-12T08:13:53.982Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">学习、总结，交流，进步！</div><div class="line">插件与脚本使得VIM强大，毋庸置疑！</div></pre></td></tr></table></figure>
+<p>全程参考:<a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external"> 所需及所获:像使用IDE一样vim</a><br>其余参考将会在文中相关部分列出。<br>文中内容如有错误，请指正！<br>原创，转载请注明出处！</p>
+<hr>
+<h3 id="Ready"><a href="#Ready" class="headerlink" title="Ready"></a>Ready</h3><p>VIM的安转请自行进行。版本最好在7.5以上。<br>请检查用户目录下是否存在: <code>.vim/</code>文件夹和<code>.vimrc</code>用户配置文件，可以使用命令 <code>ls -l ~</code> 查看。<br><code>.vim/</code>文件夹用于存放后续所有插件。<br><code>.vimrc</code>用于配置VIM功能，包括基本语法、插件配置以及部分脚本等。<br>如果没有请自行创建。</p>
+<a id="more"></a>
+<hr>
+<h3 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h3><p>可以直接添加到<code>.vimrc</code>文件中:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&quot; General set</div><div class="line">    &quot; .vimrc 文件保存后自动生效</div><div class="line">    autocmd! bufwritepost .vimrc source %   &quot; linux</div><div class="line">    &quot;let g:mapleader=&quot;;&quot;            &quot; vim 前缀键设置，默认为: \</div><div class="line">    set autowrite                   &quot; auto save file</div><div class="line">    set nobackup                    &quot; 不产生临时文件</div><div class="line">    set noswapfile                  &quot; 不产生临时文件</div><div class="line">    &quot;set t_ti= t_te=                 &quot; 退出VIM时，将当前屏幕内容显示到终端屏幕上</div><div class="line"></div><div class="line">    &quot; 不使用鼠标，方向键。实测插入模式中还是可以使用</div><div class="line">    &quot;set mouse-=a</div><div class="line">    &quot;map &lt;Left&gt;  &lt;Nop&gt;</div><div class="line">    &quot;map &lt;Right&gt; &lt;Nop&gt;</div><div class="line">    &quot;map &lt;Up&gt;    &lt;Nop&gt;</div><div class="line">    &quot;map &lt;Down&gt;  &lt;Nop&gt;</div><div class="line"></div><div class="line">    &quot; 普通模式时使用ctrl+h/j/k/l 实现多文件编辑时窗口切换</div><div class="line">    nnoremap &lt;C-j&gt; &lt;C-W&gt;j</div><div class="line">    nnoremap &lt;C-k&gt; &lt;C-W&gt;k</div><div class="line">    nnoremap &lt;C-h&gt; &lt;C-W&gt;h</div><div class="line">    nnoremap &lt;C-l&gt; &lt;C-W&gt;l</div><div class="line"></div><div class="line">    &quot; 插入模式时使用ctrl+h/j/k/l 实现光标移动</div><div class="line">    inoremap &lt;C-j&gt; &lt;Down&gt;</div><div class="line">    inoremap &lt;C-k&gt; &lt;Up&gt;</div><div class="line">    inoremap &lt;C-h&gt; &lt;Left&gt;</div><div class="line">    inoremap &lt;C-l&gt; &lt;Right&gt;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="插件管理"><a href="#插件管理" class="headerlink" title="插件管理"></a>插件管理</h3><p><a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="external">Vundle</a>是一个行之有效的插件，接管<code>.vim/</code>文件夹，为每一个插件指定唯一目录。更清晰、明了。<br><a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="external">Vundle</a>会接管<code>.vim/</code>文件夹下的所有目录，所以先清空。在通过命令安装Vundle:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim</div></pre></td></tr></table></figure>
+<p>然后在<code>.vimrc</code>中增加配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">&quot; vundle set</div><div class="line">    filetype off</div><div class="line">    set rtp+=~/.vim/bundle/Vundle.vim</div><div class="line">    call vundle#begin()</div><div class="line">    Plugin &apos;VundleVim/Vundle.vim&apos;</div><div class="line">    Plugin &apos;altercation/vim-colors-solarized&apos;</div><div class="line">    Plugin &apos;tomasr/molokai&apos;</div><div class="line">    &quot;Pluglin &apos;vim-scripts/phd&apos;</div><div class="line">    &quot;Plugin &apos;Lokaltog/vim-powerline&apos;</div><div class="line">    Plugin &apos;vim-airline/vim-airline&apos;</div><div class="line">    Plugin &apos;vim-airline/vim-airline-themes&apos;</div><div class="line">    &quot;Plugin &apos;nathanaelkane/vim-indent-guides&apos;</div><div class="line">    Plugin &apos;Yggdroot/indentLine&apos;</div><div class="line">    Plugin &apos;derekwyatt/vim-fswitch&apos;</div><div class="line">    Plugin &apos;majutsushi/tagbar&apos;</div><div class="line">    Plugin &apos;vim-scripts/indexer.tar.gz&apos;</div><div class="line">    Plugin &apos;vim-scripts/DfrankUtil&apos;</div><div class="line">    Plugin &apos;vim-scripts/vimprj&apos;</div><div class="line">    Plugin &apos;easymotion/vim-easymotion&apos;</div><div class="line">    &quot;Plugin &apos;mileszs/ack.vim&apos;</div><div class="line">    Plugin &apos;dyng/ctrlsf.vim&apos;</div><div class="line">    Plugin &apos;terryma/vim-multiple-cursors&apos;</div><div class="line">    Plugin &apos;Yggdroot/LeaderF&apos;</div><div class="line">    Plugin &apos;scrooloose/nerdcommenter&apos;</div><div class="line">    Plugin &apos;ShowTrailingWhiteSpace&apos;</div><div class="line">    Plugin &apos;SirVer/ultisnips&apos;</div><div class="line">    &quot;Plugin &apos;honza/vim-snippets&apos;</div><div class="line">    Plugin &apos;Valloric/YouCompleteMe&apos;</div><div class="line">    Plugin &apos;scrooloose/nerdtree&apos;</div><div class="line">    Plugin &apos;fholgado/minibufexpl.vim&apos;</div><div class="line">    Plugin &apos;Tabular&apos;                    &quot; automatic alignment</div><div class="line">    Plugin &apos;plasticboy/vim-markdown&apos;    &quot;</div><div class="line">    Plugin &apos;iamcco/markdown-preview.vim&apos;</div><div class="line">    &quot;Plugin &apos;iamcco/mathjax-support-for-mkdp&apos;</div><div class="line">    call vundle#end()</div><div class="line"></div><div class="line">    filetype indent on              &quot; different file smart indent</div><div class="line">    filetype plugin on              &quot; load the corrrsponding plug-in for different f</div><div class="line">    filetype plugin indent on       &quot; open antomatic completion</div></pre></td></tr></table></figure>
+<p>vundle管理的插件必须位于<code>call vundle#begin()</code> 和 <code>call vundle#end()</code>之间，其中每项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;VundleVim/Vundle.vim&apos;</div></pre></td></tr></table></figure>
+<p>对应一个插件，后续如有新的插件，只需要追加到该列表中。安装新插件时需要在Github上找到插件地址，追加到列表中保存<code>.vimrc</code>文件，然后进入到VIM命令模式，执行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PluginInstall</div></pre></td></tr></table></figure>
+<p>便可以通过vundle自动安装插件。</p>
+<p>需要卸载插件时，需要在<code>.vimrc</code>文件中注释该插件或者删除，保存<code>.vimrc</code>文件后，在命令模式执行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PluginClean</div></pre></td></tr></table></figure>
+<p>即可删除该插件。关于插件更新，直接在命令模式下，执行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PluginUpdate</div></pre></td></tr></table></figure>
+<p>即可更新整个插件列表。</p>
+<p>关于插件: 多数插件在Github上都有不同的下载源，优先选取该插件的作者的下载源。</p>
+<hr>
+<h3 id="UI-Theme"><a href="#UI-Theme" class="headerlink" title="UI Theme"></a>UI Theme</h3><p>界面优化，主题配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">&quot; Vim-UI set &#123;</div><div class="line">    &quot; theme &#123;很实用的两款:solarized、molokai</div><div class="line">        set background=dark</div><div class="line">        let g:solarized_termtrans=256</div><div class="line">        colorscheme solarized</div><div class="line">        &quot;colorscheme molokai</div><div class="line">        &quot;set guifont =              &quot; set default font</div><div class="line">    &quot; &#125;</div><div class="line">    &quot; code fold &#123;代码折叠的方式，method: manual, indent, expr, syntax, diff, marker</div><div class="line">        &quot;set foldenable             &quot; 启动VIM时，折叠</div><div class="line">        set nofoldenable            &quot; 启动VIM时，不折叠</div><div class="line">        set foldmethod=syntax       &quot; 基于语法进行折叠</div><div class="line">        &quot;set foldmarker=&#123;,&#125;</div><div class="line">    &quot; &#125;</div><div class="line">    &quot;  search &#123;搜索</div><div class="line">        set incsearch               &quot;</div><div class="line">        set hlsearch                &quot; 搜索结果高亮</div><div class="line">        set ignorecase              &quot; 忽略大小写</div><div class="line">    &quot;  &#125;</div><div class="line"></div><div class="line">    syntax enable                   &quot; 语法高亮</div><div class="line">    syntax on                       &quot;</div><div class="line"></div><div class="line">    set expandtab                   &quot; 使用空格键代替TAB键</div><div class="line">    set tabstop=4                   &quot; TAB键的宽度</div><div class="line">    set shiftwidth=4                &quot; TAB键4个空格键</div><div class="line">    &quot;set softtabstop=4              &quot; 把4个空格键自动识别为疑个TAB键</div><div class="line"></div><div class="line">    set laststatus=2                &quot; 总是显示状态栏</div><div class="line">    set ruler                       &quot; 打开状态标尺</div><div class="line">    set number                      &quot; 显示行号</div><div class="line"></div><div class="line">    set nowrap                      &quot;</div><div class="line">    set autoindent                  &quot; 自动缩进</div><div class="line">    set cursorline                  &quot; 高亮当前行</div><div class="line">    &quot;set cursorcolumn               &quot; 高亮当前列</div><div class="line">    set showmatch                   &quot; highlighting the matching brack</div><div class="line"></div><div class="line">    &quot;set gcr=a:block-blinon0        &quot; 禁止光标闪烁</div><div class="line"></div><div class="line">    &quot;set guioptions-=l              &quot; ban on the scroll bar dispaly</div><div class="line">    &quot;set guioptions-=L</div><div class="line">    &quot;set guioptions-=r</div><div class="line">    &quot;set guioptions-=R</div><div class="line"></div><div class="line">    &quot;set guioptions-=m              &quot; ban on the menu bar dispaly</div><div class="line">    &quot;set guioptions-=M</div><div class="line">&quot; &#125;</div></pre></td></tr></table></figure>
+<h6 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h6><p>通过前面插件列表下载了solarized、molokai两款主题，可以通过注释其中一款而是用另一款。<br>在实际使用中molokai可以直接使用，而主题solarized使用时，背景配色异常，最后通过以下方式正常使用（安装后能够正常使用的请忽略）。</p>
+<p><code>选取终端菜单栏中</code>Edit(编辑)<code>栏，最后一项</code>Profile Preference<code>，在弹出界面框中选中</code>color<code>项，如下图所示:</code></p>
+<p><img src="https://github.com/jungleeee/vim/blob/master/pic/1_solarized.png" alt="solarized"></p>
+<h6 id="代码折叠"><a href="#代码折叠" class="headerlink" title="代码折叠"></a>代码折叠</h6><p>文件代码量大时，可能会对分析代码产生干扰，或者通过折叠函数调用与定义之间的代码，可以更加直观的理解函数功能。<br>VIM自身支持多种折叠：手动折叠(manual)、基于缩进进行折叠(indent)、基于语义进行折叠(syntax)、未更改文本构成折叠等等。<br>其中indent、syntax较为适合编程。此段摘抄 <a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">所需及所获:像使用IDE一样使用vim</a> 4.3节。</p>
+<p><code>操作: za: 打开或关闭当前折叠；zM: 关闭多有折叠；zR: 打开多有折叠。</code></p>
+<h6 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h6><p>VIM基本配置项很多，本人并没有进行太多设置，具体设置项的作用或者功能，请参考其他<code>.vimrc</code>文件，或者对该项<br>Search，基本上都能够得到解释，在此不过多赘述。将会在文末贴上部分其他作者的<code>.vimrc</code>文件，以供参考。</p>
+<hr>
+<h3 id="插件详细"><a href="#插件详细" class="headerlink" title="插件详细"></a>插件详细</h3><h6 id="状态栏"><a href="#状态栏" class="headerlink" title="状态栏"></a>状态栏</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">set laststatus=2                &quot; 总是显示状态栏</div><div class="line"></div><div class="line">&quot;Plugin &apos;Lokaltog/vim-powerline&apos;</div><div class="line">Plugin &apos;vim-airline/vim-airline&apos;</div><div class="line">Plugin &apos;vim-airline/vim-airline-themes&apos;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/Lokaltog/vim-powerline" target="_blank" rel="external">vim-powerline</a> 和 <a href="https://github.com/vim-airline/vim-airline" target="_blank" rel="external">vim-airline</a> 都是状态栏美化插件，选用其一，注释另外一个。<a href="https://github.com/vim-airline/vim-airline-theme" target="_blank" rel="external">vim-airline-theme</a> 提供 <code>vim-airline</code> 的主题，<br>在其路径 <code>vim-airline-theme/doc/</code> 下文件 <code>airline-themes.txt</code> 有对于可使用的主题的介绍。</p>
+<p>状态栏配置，在<code>.vimrc</code>文件中添加以下内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot; set powerline theme style</div><div class="line">let g:Powerline_colorscheme=&apos;solarized256&apos;</div></pre></td></tr></table></figure>
+<p>当选择<code>vim-powerline</code>作为状态栏主题时，添加上述内容；选择<code>vim-airline</code>时，添加以下内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot; set airling theme style</div><div class="line">let g:airline_theme=&apos;powerlineish&apos;</div></pre></td></tr></table></figure>
+<h6 id="可视化缩进"><a href="#可视化缩进" class="headerlink" title="可视化缩进"></a>可视化缩进</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;Yggdroot/indentLine&apos;</div><div class="line">&quot;Plugin &apos;nathanaelkane/vim-indent-guides&apos;</div></pre></td></tr></table></figure>
+<p>很多代码规范中建议代码嵌套最多不能超过3层，但难免有更多层出现。<a href="https://github.com/nathanaelkane/vim-indent-guides" target="_blank" rel="external"><br>vim-indent-guides </a>插件提供可视化缩进，将相同缩进的代码关联起来，<code>vim-indent-guides</code>通过识别制表符来绘制缩进连接线。在<code>.vimrc</code>文件中添加如下配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&quot; set indent guides</div><div class="line">let g:indent_guides_enable_on_vim_startup=1 &quot; 打开VIM时跟随启动</div><div class="line">let g:indent_guides_start_level=2           &quot; 从第二层开始可视化缩进</div><div class="line">let g:indent_guides_guide_sizw=1            &quot; 色块宽度</div></pre></td></tr></table></figure>
+<p>本人配置完成后使用，发现色块宽度占了4个空格，原因未查。</p>
+<p>另外一个插件<a href="https://github.com/Yggdroot/indentLine" target="_blank" rel="external">indentLine</a> ，在显示可视化缩进时，只有一根细线，甚和我意。推荐一哈。<br>后面还有一款他写的插件<code>LeaderF</code>，提供文件搜索功能，后面在介绍。<code>indentLine</code>基本上可以不用配置，但提供几个可选用配置项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&quot; set indentLine</div><div class="line">&quot;let g:indentLine_enable = 1                    &quot; 默认就是开启的</div><div class="line">&quot;let g:indentLine_char = &apos;┆&apos; &apos;│&apos;  &apos;⎸&apos; &apos;▏&apos; &apos;¦&apos;   &quot; 配置可视化缩进时的显示符号，选其一</div><div class="line">&quot;let g:indentLine_color_term = 239              &quot; 参看作者的解释</div><div class="line">&quot;map &lt;C-i&gt; :IndentLineToggle&lt;CR&gt;                &quot; 映射快捷键用来开启/关闭可是话缩进</div></pre></td></tr></table></figure>
+<p><img src="https://github.com/jungleeee/vim/blob/master/pic/2_indentLine.png" alt="indentLine"></p>
+<h6 id="文件切换"><a href="#文件切换" class="headerlink" title="文件切换"></a>文件切换</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;derekwyatt/vim-fswitch&apos;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/derekwyatt/vim-fswitch" target="_blank" rel="external">vim-fswitch</a> 用来实现在源文件和头文件中快速切换，但需要保证文件名相同，比如<code>main.c</code>和<code>main.h</code>。需要在<code>.vimrc</code>文件中添加:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot; *.c** &amp; *.h, fast switch</div><div class="line">nmap &lt;M-t&gt; :FSHere&lt;CR&gt;      &quot; 切换文件 *.c/cpp/.. &amp; *.h</div></pre></td></tr></table></figure>
+<p>我在这里使用了<code>Alt+t</code>组合键，<code>M</code>代表<code>Alt</code>键。除掉苹果键盘，<code>Alt</code>键就在大拇指下，个人觉得这个键，使用很方便。插播一下<code>Alt</code>键说明:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">我选择这个键只有一个原因，就是觉得的不用起来，好浪费。但是实际使用起来bug有比较多，所以。。。我选择了将就。</div></pre></td></tr></table></figure>
+<h6 id="标签系统"><a href="#标签系统" class="headerlink" title="标签系统"></a>标签系统</h6><p>代码中的变量、宏、结构、枚举、类、函数、对象等等这些统称为标识符，每个标识符的定义、所在文件的行位置、所在文件的路径等信息就是标签（tag)。<br>此段摘抄 <a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">所需及所获:像使用IDE一样使用vim</a>  4.6节。</p>
+<p><code>Exuberant Ctags</code>就是一款经典的用于生成代码标签信息的工具，支持数十种语言。请在终端中执行命令安装。安装完成后，在代码目录中执行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctags -R</div></pre></td></tr></table></figure>
+<p>将会在当前目录下生成<code>tag</code>文件，包含了当前目录下所有文件的标识符集合。</p>
+<p>标签除了可以很直观展示当前文件中的各种信息，还能提供强大的导航和补全功能，接下来将会一一介绍。</p>
+<p>在生成<code>tag</code>文件后，可以通过插件 <a href="https://github.com/majutsushi/tagbar" target="_blank" rel="external">tagbar</a> 把从当前代码文件中提取出的所有标识符放在一个侧边子窗口中，并且能够按语法规则将标识符进行归类。<br><code>tagbar</code>安装完成后在<code>.vimrc</code>文件中添加如下配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">&quot; set tagbar</div><div class="line">map &lt;F8&gt; :TagbarToggle&lt;CR&gt;  &quot; 通过快捷键F8实现tagbar打开/关闭</div><div class="line">let tagbar_left=1           &quot; 设置tagbar子窗口的位置出现在主编辑的左边</div><div class="line">let tagbar_width=32         &quot; 设置窗口宽度</div><div class="line">let g:tagbar_compact=1      &quot; 子窗口不显示冗余帮助信息</div><div class="line">let g:tagbar_sort=0         &quot; 设置默认排序方式为在文中出现的位置</div><div class="line">let g:tagbar_type_cpp = &#123;   &quot; 设置对哪些代码标识符生成标签</div><div class="line">        \&apos;kinds&apos; : [</div><div class="line">            \ &apos;c:classes:0:0&apos;,</div><div class="line">            \ &apos;d:macros:0:0&apos;,</div><div class="line">            \ &apos;e:enumerators:0:0&apos;,</div><div class="line">            \ &apos;f:functions:0:0&apos;,</div><div class="line">            \ &apos;g:enumeration:0:0&apos;,</div><div class="line">            \ &apos;l:local:0:0&apos;,</div><div class="line">            \ &apos;m:members:0:0&apos;,</div><div class="line">            \ &apos;n:namespaces:0:0&apos;,</div><div class="line">            \ &apos;p:functions_prototypes:0:0&apos;,</div><div class="line">            \ &apos;s:structs:0:0&apos;,</div><div class="line">            \ &apos;t:typedefs:0:0&apos;,</div><div class="line">            \ &apos;u:unions:0:0&apos;,</div><div class="line">            \ &apos;v:global:0:0&apos;,</div><div class="line">            \ &apos;x:wxternal:0:0&apos;</div><div class="line">        \ ],</div><div class="line">        \ &apos;sro&apos;        : &apos;::&apos;,</div><div class="line">        \ &apos;kind2scope&apos; : &#123;</div><div class="line">            \ &apos;g&apos; : &apos;enum&apos;,</div><div class="line">            \ &apos;n&apos; : &apos;namespaces&apos;,</div><div class="line">            \ &apos;c&apos; : &apos;class&apos;,</div><div class="line">            \ &apos;s&apos; : &apos;struct&apos;,</div><div class="line">            \ &apos;u&apos; : &apos;union&apos;</div><div class="line">        \ &#125;,</div><div class="line">        \ &apos;scope2kind&apos; : &#123;</div><div class="line">            \ &apos;enum&apos;      : &apos;g&apos;,</div><div class="line">            \ &apos;namespace&apos; : &apos;n&apos;,</div><div class="line">            \ &apos;class&apos;     : &apos;c&apos;,</div><div class="line">            \ &apos;struct&apos;    : &apos;s&apos;,</div><div class="line">            \ &apos;union&apos;     : &apos;u&apos;</div><div class="line">            \ &#125;</div><div class="line">        \ &#125;</div></pre></td></tr></table></figure>
+<p>进入之前生成<code>tag</code>文件的目录下，打开某一源文件后，通过快捷键<code>F8</code> 打开<code>tagbar</code>子窗口，可以通过快捷键<code>ctrl+w+w</code>快速切换子窗口，类似<code>alt+tab</code>的功能，或者使用前面定义的<code>ctrl+h/i/j/k</code>在<code>normal</code>模式下进行窗口切换，进入到<code>tagbar</code>窗口中。</p>
+<p>在标识符列表中选中对应标识符后即可跳转至源码中对应位置;在源码中停顿几秒，<code>tagbar</code>将高亮对应标识符。<code>tagbar</code>有两种排序方式，一是按标签字母先后顺序；一是按标签在源码中出现的先后顺序。此段摘抄 <a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">所需及所获:像使用IDE一样使用vim</a> 4.7节。</p>
+<p>注释掉<code>let g:tagbar_sort=0</code>，将会使用字母顺序排序。</p>
+<p>开发时代码不停在变更，如果每次都需要手动执行命令生成新的标签文件，太麻烦。通过引入插件 <a href="https://github.com/vim-scripts/indexer.tar.gz" target="_blank" rel="external">indexer</a> 实现自动生成标签。并引入。<br><code>indexer</code> 依赖 <a href="https://github.com/vim-scripts/DfrankUtil" target="_blank" rel="external">DfrankUtil</a>、<a href="https://github.com/vim-scripts/vimpr" target="_blank" rel="external">vimprj</a> 两个插件，请一并安装。 此段摘抄<a href="https://github.com/yangyangwithgnu/use_vim_as_id" target="_blank" rel="external">所需及所获:像使用IDE一样使用vim</a> 4.7节。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;vim-scripts/indexer.tar.gz&apos;</div><div class="line">Plugin &apos;vim-scripts/DfrankUtil&apos;</div><div class="line">Plugin &apos;vim-scripts/vimprj&apos;</div></pre></td></tr></table></figure>
+<p>并在<code>.vimrc</code>文件中添加:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&quot; 设置插件 indexer 调用 ctags 的参数</div><div class="line">&quot; 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v</div><div class="line">&quot; 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl</div><div class="line">let g:indexer_ctagsCommandLineOptions=&quot;--c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q&quot;</div></pre></td></tr></table></figure>
+<p>另外，<code>indexer</code> 还有个自己的配置文件，用于设定各个工程的根目录路径，配置文件位于<code>~/.indexer_files</code>，内容格式为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[project_name]</div><div class="line">/project/code</div></pre></td></tr></table></figure>
+<p>方括号内为自动生成的标签文件名字，一般更工程一样。路径为工程的代码目录，不要包含构建目录，文档目录等，以免产生非代码文件的标签信息。<br>当打开以上目录任何代码文件时，插件<code>indexer</code>便对整个目录创建标签文件，当代码有更新，文件保存时，<code>indexer</code>将自动调用<code>ctags</code>更新标签文件。<br><code>indexer</code>生成的标签文件以方括号内的名字命名，位于目录: <code>~/.indexer_files_tags/</code> 下，并自动引入<code>Vim</code>中。此处3段摘抄 <a href="https://github./yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">所需及所获:像使用IDE一样使用vim</a> 4.7节。</p>
+<h6 id="声明-定义跳转"><a href="#声明-定义跳转" class="headerlink" title="声明/定义跳转"></a>声明/定义跳转</h6><p>主要两类导航: 基于标签的跳转和基于语义的跳转。</p>
+<p>既然<code>Vim</code>可以引入标签，说明<code>Vim</code>能识别标签。虽然标签文件中并无行号，但已经有标签所在文件以及标签所在行的完整内容，<code>Vim</code>只需切换至对应文件，再在文件内做内容查找即可找到对应行。<br>换言之，只要有对应的标签文件，<code>Vim</code>就能根据标签跳转至标签定义处。</p>
+<p>在前述已生成标签文件的项目目录中打开任意文件，将光标定位到某一函数名或变量上，键入快捷键<code>g]</code>，<code>Vim</code>将罗列处该函数或变量名所有的标签候选列表，按需要键入编号后按<code>Enter</code>键即可跳转进入。</p>
+<p>基于语义的跳转是在后面介绍补全时的一款插件<code>YCM</code>的功能。此处直接给出快捷键设置，在<code>.vimrc</code>文件中添加配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&quot;nnoremap &lt;M-=&gt; :YcmCompleter GoToDefinition&lt;CR&gt;                &quot; jump to define</div><div class="line">&quot;nnoremap &lt;M-=&gt; :YcmCompleter GoToDeclaration&lt;CR&gt;               &quot; jump to declaration</div><div class="line">nnoremap &lt;M-=&gt; :YcmCompleter GoToDefinitionElseDeclaration&lt;CR&gt;  &quot; jump to define or declaration</div></pre></td></tr></table></figure>
+<p><code>YCM</code>提供这三个快捷键定义，意思很明了，可以根据自己情况进行配置，当然需要配置不同的快捷键。</p>
+<p>但是个人感觉，这两个插件的跳转功能都不够好用。</p>
+<p>写到这儿，有点不想写了。很多东西在我参考的文章中都很详细，很多地方都是摘抄过来的，所以后续我回直接贴出我所介绍的插件在原文章中的章节位置，然后主要介绍我所遇到的一些小问题和解决办法，以及我的快捷键配置，提供十分有限的参考价值，谢谢。</p>
+<h6 id="快速移动"><a href="#快速移动" class="headerlink" title="快速移动"></a>快速移动</h6><p><a href="https://github.com/easymotion/vim-easymotion" target="_blank" rel="external">vim-easymotion</a> 更多请参考 <a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">所需及所获:像使用IDE一样使用vim</a>  8.3节。</p>
+<p><code>.vimrc</code>文件配置如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;easymotion/vim-easymotion&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot; set easymotion</div><div class="line">let g:EasyMotion_leader_key=&apos;f&apos;</div></pre></td></tr></table></figure>
+<p>设置启用<code>easymotion</code>的前缀键<code>&lt;Leader&gt;</code>为<code>f</code>，在<code>normal</code>模式下，双击<code>f</code>键后输入需要跳转到的位置的字母，然后根据快速跳转的字符，快速定位到目标位置。</p>
+<h6 id="内容查找"><a href="#内容查找" class="headerlink" title="内容查找"></a>内容查找</h6><p>更多请参考 <a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">所需及所获:像使用IDE一样使用vim</a>  4.8节。</p>
+<p><a href="https://github.com/dyng/ctrlsf.vim" target="_blank" rel="external">ctrlsf.vim</a> 后端调用<code>ack</code>一定记得安装。<code>.vimrc</code>文件中添加配置如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;dyng/ctrlsf.vim&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&quot; set ctrlsf</div><div class="line">    let g:ctrlsf_ackprg=&apos;ack&apos;              &quot; set default</div><div class="line">    nnoremap &lt;M-f&gt; :CtrlSF&lt;CR&gt;             &quot; 键入快捷键alt+f，搜索光标当前字符串的匹配项</div></pre></td></tr></table></figure>
+<p><code>ctrlsf</code>通过<code>p</code>键可以定位到匹配项的完整代码，类似跳转功能，键入<code>q</code>退出插件。</p>
+<h6 id="内容替换"><a href="#内容替换" class="headerlink" title="内容替换"></a>内容替换</h6><p>更多请参考 <a href="https:/github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">所需及所获:像使用IDE一样使用vim</a> 4.9节。</p>
+<p><a href="https://github.com/terryma/vim-multiple-cursors" target="_blank" rel="external">vim-multiple-cursors</a> 配合<code>ctrlsf</code>插件，实现多个不同位置的字符串替换。<code>.vimrc</code>文件中添加如下配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;terryma/vim-multiple-cursors&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&quot; set multiple-sursors</div><div class="line">let g:multi_cursor_use_default_mapping=0</div><div class="line">let g:multi_cursor_next_key=&apos;&lt;S-n&gt;&apos;</div><div class="line">let g:multi_cursor_prev_key=&apos;&lt;S-p&gt;&apos;</div><div class="line">let g:multi_cursor_skip_key=&apos;&lt;S-s&gt;&apos;</div><div class="line">let g:multi_cursor_quit_key=&apos;&lt;ESC&gt;&apos;</div></pre></td></tr></table></figure>
+<p><code>S</code>表示<code>Shift</code>键。在通过<code>ctrlsf</code>插件列举处匹配项后，则可以通过快捷键<code>S-n</code>选中当前匹配项并跳到下一个匹配项，键入<code>S-s</code>则可以跳过当前项而选中下一个，可以通过<code>S-p</code>回退到前一个匹配项。键入<code>Esc</code>推出插件。</p>
+<p><code>Vim</code>自带很强大的替换功能，这里就不介绍了。建议了解一哈，一般会看这篇文档的，都有可能在面试的时候被提问。-_-</p>
+<h6 id="文件搜索"><a href="#文件搜索" class="headerlink" title="文件搜索"></a>文件搜索</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;Yggdroot/LeaderF&apos;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/kien/ctrlp.vim" target="_blank" rel="external">ctrlP</a> 和<a href="https://github.com/Yggdroot/LeaderF" target="_blank" rel="external">LeaderF</a> 插件都能实现文件搜索功能，<code>ctrlP</code>在网上搜索就能找到配置方法，这里不介绍。这里使用的<code>LeaderF</code>在网上资料不多，看作者的介绍操作，暂时还不够熟悉，后续补充。</p>
+<h6 id="快速注释"><a href="#快速注释" class="headerlink" title="快速注释"></a>快速注释</h6><p>更多请参考 <a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">所需及所获:像使用IDE一样使用vim</a>  5.1节。</p>
+<p><a href="https://github.com/scrooloose/nerdcommenter" target="_blank" rel="external">NERD Commenter</a> 能够快速注释/取消注释，并且提供不同的注释方式。在<code>.vimrc</code>文件中添加配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;scrooloose/nerdcommenter&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&quot; set nerdcommenter</div><div class="line">map &lt;M-c&gt; &lt;Leader&gt;cc                   &quot; add comment</div><div class="line">map &lt;M-u&gt; &lt;Leader&gt;cu                   &quot; cancel comment</div><div class="line">map &lt;M-a&gt; &lt;Leader&gt;ca                   &quot; switch /*  */ &amp; //</div><div class="line">let g:NERDSpaceDelims=1                &quot; 强制在注释符旁边增加一个空格</div></pre></td></tr></table></figure>
+<p>在<code>Vim</code> <code>normal</code>模式下，键入<code>v</code>或者<code>V</code>进入可视化模式，通过<code>h/j/k/l</code>选中需要注释的部分，键入快捷键<code>alt+c</code>则注释当前选中代码。<br>反之，选中需要取消注释的部分，键入快捷键<code>alt+u</code>取消注释。<code>alt+a</code>可以切换注释方式:<code>/* */或者//</code>，但这个快捷键定义跟某些有冲突，将就可用，也可以自定义其他。</p>
+<h6 id="行尾空格"><a href="#行尾空格" class="headerlink" title="行尾空格"></a>行尾空格</h6><p>这个插件是我在知乎的一个回答中了解到的，有实用性，提供参考。贴上这个知乎的帖子:<a href="https://www.zhihu.com/question/19989337" target="_blank" rel="external">https://www.zhihu.com/question/19989337</a><br>写程序时，虽然行尾的空格都看不见，遇上了的话，有点强迫症的肯定受不了。为了能够显示行尾的空格，需要<a href="https://github.com/vim-scripts/ShowTrailingWhitespace" target="_blank" rel="external">ShowTrailingWhiteSpace</a>这个插件。在<code>.vimrc</code>中添加如下内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;vim-scripts/ShowTrailingWhiteSpace&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&quot; set ShowTrailingWhitespace</div><div class="line">let g:ShoeTrailingWhitespace=1                          &quot; default ON; 1 on, 0 off</div><div class="line">highlight ShowTrailingWhitespace ctermbg=Red guibg=Red  &quot; 可以理解为高亮行尾空格</div></pre></td></tr></table></figure>
+<p>帖子中的回答者，还提供了一个快捷键，自动清理文件中所有行尾的空格:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;strip all trailing whitespace in the current file</div><div class="line">nnoremap &lt;leader&gt;w :%s/\s\+$//&lt;cr&gt;:let @/=&apos;&apos;&lt;CR&gt;</div></pre></td></tr></table></figure>
+<p>我自己改变了一哈，每次保存文件(所有格式的文件)的时候，自动清除当前文件中所有行尾的空格:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;autocmd BufWritePre *.c,*.cpp,*.h,*.sh, :%s/\s\+$//e</div><div class="line">autocmd BufWritePre * :%s/\s\+$//e</div></pre></td></tr></table></figure>
+<p>注释掉的配置，表示只在这几个类型的文件执行保存文件命令时自动清除行尾空格，文件类型自己根据需要添加。</p>
+<h6 id="补全"><a href="#补全" class="headerlink" title="补全"></a>补全</h6><p>主要介绍三种补全:模板补全，基于标签的补全，基于语义的补全。</p>
+<p>模板补全: 更多请参考 <a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">所需及所获:像使用IDE一样使用vim</a>  5.2节。</p>
+<p><a href="https://github.com/SirVer/ultisnhips" target="_blank" rel="external">ultisnips</a> 提供相同代码段的快速输入，比如<code>if-else</code>、<code>switch-case</code>语句。在<code>.vimrc</code>文件中添加如下配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;SirVer/ultisnips&apos;</div><div class="line">&quot;Plugin &apos;honza/vim-snippets&apos;</div></pre></td></tr></table></figure>
+<p><code>ultisnips</code>补全时用于选中的键为<code>tab</code>，与后面将要提到的插件<code>YCM</code>的快捷键有冲突，所以提供改建的配置方式。个人选择改<code>YCM</code>的快捷键。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&quot; set ultisnips</div><div class="line">&quot;let g:UltiSnipsExpandTrigger=&quot;&lt;Leader&gt;&lt;tab&gt;&quot;</div><div class="line">&quot;let g:UltiSnipsJumpForwardTrigger=&quot;&lt;M-n&gt;&quot;</div><div class="line">&quot;let g:UltiSnipsJumpBackwardTrigger=&quot;&lt;M-m&gt;&quot;</div></pre></td></tr></table></figure>
+<p>另外需要说明的一点是，下载<code>ultisnips</code>插件后，默认是没有提供模板补全用的文件的。需要自己下载。<br>一种方式时安装插件<a href="https://github.com/honza/vim-snippets" target="_blank" rel="external">vim-snippets</a>，复制<code>~/.vim/bundle/vim-snippets/UltiSnips</code>整个文件夹到<code>~/.vim/bundle/ultisnips</code>目录下面即可。<br>另一种是自己到<code>github</code>上去下载， <a href="https://github.com/honza/vim-snippets" target="_blank" rel="external">https://github.com/honza/vim-snippets</a> ，其实内容都是一样的。我认为这个插件最好的点是支持自己定义，很强大。</p>
+<p>基于标签的补全: 详情请参考 <a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">所需及所获:像使用IDE一样使用vim</a>  5.3节部分。</p>
+<p>基于语义的补全: 更多请参考 <a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">所需及所获:像使用IDE一样使用vim</a>  5.3节部分。</p>
+<p><a href="https://github.com/Valloric/YouCompleteMe" target="_blank" rel="external">YouCompleteMe</a> 插件在安装过程中，参看文章的作者以及很多其他介绍<code>YCM</code>插件使用的作者都有说到，<code>YCM</code>原作者建议下载<code>LLVM</code>官网提供的预编译二进制文件，以避免各种问题。<br>但我按照教程介绍，最后编译生成始终只有一个<code>ycm_core.so</code>文件，也没有查找到原因，待优化。<br>然后后面我是按照<code>YCM</code>原作者Git项目中<code>README.md</code>文件中<code>Ubuntu Linux x64</code>部分实现安装的，不需要手动下载库，按作者的顺序执行即可，需要比较长的时间。需要确认已安装<code>Cmake</code>、<code>python-dev</code>、<code>python3-dev</code>，没有的话请自行安装。<br>更多请自行阅读原作者<a href="https://github.com/Valloric/YouCompleteMe" target="_blank" rel="external"> README.md </a>。</p>
+<p><code>YCM</code>插件需要在<code>.vimrc</code>文件中添加配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;Valloric/YouCompleteMe&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&quot; set YouComplete</div><div class="line">set runtimepath+=~/.vim/bundle/YouCompleteMe</div><div class="line">let g:ycm_collect_identifiers_from_tags_files=1                             &quot; 开启YCM标签补全</div><div class="line">let g:ycm_complete_in_comments=1                                            &quot; 补全功能在注释中同样有效</div><div class="line">let g:ycm_seed_identfiers_with_syntax=1                                     &quot; 语法关键字补全</div><div class="line">let g:ycm_confirm_extra_conf=0                                              &quot; 允许VIM加载.ycm_extra_conf.py 文件，不再提示</div><div class="line">let g:ycm_key_list_select_completion=[&apos;&lt;M-n&gt;&apos;, &quot;&lt;Down&gt;&quot;]                    &quot; 补全列表中 向下选中</div><div class="line">let g:ycm_key_list_previous_completion=[&apos;&lt;M-m&gt;&apos;, &quot;&lt;Up&gt;&quot;]                    &quot; 补全列表中 向上选中</div><div class="line">let g:ycm_min_num_of_chars_for_completion=2                                 &quot; 从第2个键入字符就开始罗列匹配项</div><div class="line">let g:ycm_cache_comnifunc=0                                                 &quot; 禁止缓存匹配项，每次都重新生成匹配项</div><div class="line">&quot; 加载.ycm_extra_conf.py 文件的路径，可以不用每个工程目录下都去添加这个文件</div><div class="line">let g:ycm_global_ycm_extra_conf=&apos;~/.vim/bundle/YouCompleteMe/third_part/ycmd/cpp/ycm/.ycm_extra_conf.py&apos;</div><div class="line">&quot;nnoremap &lt;M-=&gt; :YcmCompleter GoToDefinition&lt;CR&gt;                            &quot; 跳转到声明/定义的位置，在前面跳转部分有介绍</div><div class="line">&quot;nnoremap &lt;c-j&gt; :YcmCompleter GoToDefinitionElseDeclaration&lt;CR&gt;</div><div class="line">nnoremap &lt;M-=&gt; :YcmCompleter GoToDefinitionElseDeclaration&lt;CR&gt;</div></pre></td></tr></table></figure>
+<p>另外还需要配置<code>.ycm_extra_conf.py</code>文件以及引入标签补全，这里就不做详述，请自行参考介绍。</p>
+<h6 id="工程文件管理"><a href="#工程文件管理" class="headerlink" title="工程文件管理"></a>工程文件管理</h6><p><a href="`https://github.com/scrooloose/nerdtree">NERDtree</a>可以查看文件列表，要打开哪个文件，光标选中后回车即可在新<code>buffer</code>中打开。在<code>.vimrc</code>文件中添加如下配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;scrooloose/nerdtree&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&quot; set NERDTree</div><div class="line">nmap &lt;F9&gt; :NERDTreeToggle&lt;CR&gt;</div><div class="line">let NERDTreeShowBookmarks=1             &quot; set NERDTree book marks default on</div><div class="line">let NERDTreeIgnore=[&apos;\.py[cd]$&apos;, &apos;\~$&apos;, &apos;\.swo$&apos;, &apos;\.swp$&apos;, &apos;^\.git$&apos;, &apos;^\hg$&apos;, &apos;^\.svn$&apos;, &apos;\.bzr$&apos;]</div><div class="line">let NERDTreeWinSize=32                  &quot; set width</div><div class="line">let NERDTreeWinPos=&quot;right&quot;              &quot; set position</div><div class="line">let NERDTreeShoeHidden=1                &quot; show the hidden files</div><div class="line">let NERDTreeMinimalUI=1                 &quot; the window tags not show help info</div><div class="line">let NERDTreeAutoDeleteBuffer=1          &quot; Automatically deletes files when deletes files buffer</div></pre></td></tr></table></figure>
+<p>更多请参考<a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external"> 所需及所获:像使用IDE一样使用vim</a>  6.1节部分。</p>
+<h6 id="多文件编辑"><a href="#多文件编辑" class="headerlink" title="多文件编辑"></a>多文件编辑</h6><p><code>Vim</code>中每打开一个文件<code>Vim</code>就对应创建一个<code>buffer</code>，多个文件就有多个<code>buffer</code>，但默认你只看得到最后<code>buffer</code>对应的Window，通过插件<a href="https://github.com/fholgado/minibufexpl.vim" target="_blank" rel="external">MiniBufExplorer</a>可以切换到不同的<code>buffer</code>及达到编辑多个文件的功能。在<code>.vimrc</code>文件中添加配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;fholgado/minibufexpl.vim&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&quot; set minibuffexploer</div><div class="line">map &lt;M-q&gt; :bn&lt;CR&gt;                           &quot; 切换多个buffer时的快捷键</div><div class="line">map &lt;M-w&gt; :bp&lt;CR&gt;</div><div class="line">&quot; 这个设置，网上我查到两种说法，一个是在gvim下时防止出现多窗口，一种是自动打开。实际情况看，无论是0/1，在只有一个文件时都会显示nimibuffer</div><div class="line">let g:let g:miniBufExplorerMoreThanOne=1</div></pre></td></tr></table></figure>
+<p><code>buffer</code>快捷切换时，只需要在当前编辑文件中<code>normal</code>下按快捷键切换(需要存在多个buffer)，但是删除<code>buffer</code>时，需要将光标定位到<code>buffer</code>标签上。键入<code>d</code>删除光标所在<code>buffer</code>。</p>
+<p>更多请参考<a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external"> 所需及所获:像使用IDE一样使用vim</a>  6.2节部分。</p>
+<h6 id="自动对齐"><a href="#自动对齐" class="headerlink" title="自动对齐"></a>自动对齐</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;godlygeek/tabular&apos;               &quot; 自动对齐</div></pre></td></tr></table></figure>
+<p>后续补充。可自行搜索。</p>
+<h6 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h6><p><code>Markdown</code>就不多解释了，在<code>Vim</code>编辑过程中最大的需求就是实时预览，在这里介绍插件<a href="https://github.com/iamcco/markdown-preview.vim" target="_blank" rel="external">markdown-preview</a>，能够实现在浏览器中实时预览，默认是谷歌浏览器<code>Chorme</code>，自行下载。<br>需要说明的是，这款插件在Github上比较多，比如<a href="https://github.com/atom/markdown-preview" target="_blank" rel="external">markdown-preview</a>，不需要浏览器支持即可实时预览，供君选择。<br><a href="https://github.com/plasticboy/vim-markdown" target="_blank" rel="external">vim-markdown</a> 是一个语法高亮插件，根据实际情况使用。</p>
+<p>在<code>.vimrc</code>文件中添加配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Plugin &apos;plasticboy/vim-markdown&apos;</div><div class="line">Plugin &apos;iamcco/markdown-preview.vim&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&quot; set markdown</div><div class="line">let g:mkdp_auto_start=0                 &quot; set 1, the vim will auto open preview window once enter markdown buffer</div><div class="line">let g:mkdp_auto_open=0                  &quot; set 1, the vim will auto open preciew window when you edit the markdown file</div><div class="line">let g:mkdp_auto_close=1                 &quot; set 1, the vim will auto close current preview window when change from markdown buffer to another buf</div><div class="line">let g:mkdp_refresh_slow=0               &quot; set 1, the vim will just refresh markdown when save the buffer or leave frim insert mode,default 0 is</div><div class="line">let g:mkdp_command_for_global=0         &quot; set 1, the markdown preview command can be use for all files, by default it just can be use in markdo</div><div class="line">let g:mkdp_path_to_chrome=&quot;google-chrome&quot;</div><div class="line">map &lt;F6&gt; &lt;Plug&gt;MarkdownPreview</div><div class="line">map &lt;F7&gt; &lt;Plug&gt;StopMarkdownPreview</div></pre></td></tr></table></figure>
+<p>基本上都是默认配置，除了打开/关闭的快捷键映射。更多的话，可以自己到Github看作者介绍。</p>
+<h3 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h3><h6 id="文件模板"><a href="#文件模板" class="headerlink" title="文件模板"></a>文件模板</h6><p>新建源文件时，一般都会添加一些文件信息在文件开始的位置处。常见比如文件名、作者、创建时间、文件简介等等，如果每次都手动添加，就会很麻烦。所以可以通过添加脚本函数的方式，实现文件新建时自动添加。<br>在这里贴上一个<code>.vimrc</code>文件的配置，可以参考他的实现方式: <a href="https://github.com/taizilongxu/dotfiles/blob/master/vimrc" target="_blank" rel="external">https://github.com/taizilongxu/dotfiles/blob/master/vimrc</a> 。文件中其他也可以参考。<br>注意一点，如果需要判断是否为<code>*.h</code>文件，头文件，请使用<code>if expand(&quot;%:e&quot;)==&#39;h&#39;</code>进行判断。</p>
+<h6 id="自动添加时间"><a href="#自动添加时间" class="headerlink" title="自动添加时间"></a>自动添加时间</h6><p>需要的话也是通过脚本函数实现。<code>.vimrc</code>文件中添加配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">autocmd BufWritePre,FileWritePre *.c,*.h,*.sh,*.py ks|call LastChanged()|&apos;s</div><div class="line">func! LastChanged()                          &quot; auto add last changed date</div><div class="line">    if line (&quot;$&quot;) &gt; 15</div><div class="line">        let l = 15</div><div class="line">    else</div><div class="line">        let l = line(&quot;$&quot;)</div><div class="line">    endif</div><div class="line">    exe &quot;1,&quot;.l.&quot;g/Last Changed : /s/Last Changed : .*/Last Changed : &quot;.strftime(&quot;%c&quot;)</div><div class="line">endfunc</div></pre></td></tr></table></figure>
+<p>关于这一段的解释和详细介绍请参考: <a href="http://www.cnblogs.com/soli/archive/2009/10/21/885044.html" target="_blank" rel="external">http://www.cnblogs.com/soli/archive/2009/10/21/885044.html</a> 。</p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>第一次的环境配置就先这样了，后续有其他好用插件，会再推荐。文中还有没写完整的，会尽快补充。<br>没有特别认真的写，比较水，希望不要介意，能够提供一丁点的帮助，我觉得也是好的。谢谢。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>1、<a href="https://github.com/yangyangwithgnu/use_vim_as_ide" target="_blank" rel="external">所需及所获:像使用IDE一样使用vim</a><br>2、<a href="https://github.com/wklken/k-vim/blob/master/vimrc" target="_blank" rel="external">.vimrc</a><br>3、<a href="https://github.com/taizilongxu/dotfiles/blob/master/vimrc" target="_blank" rel="external">.vimrc</a><br>4、<a href="https://github.com/humiaozuzu/dot-vimrc/blob/master/vimrc" target="_blank" rel="external">.vimrc</a><br>5、<a href="http://www.cnblogs.com/soli/archive/2009/10/21/885044.html" target="_blank" rel="external">vim配置技巧——在vim中使用autocmd命令在保存文件时自动插入最后修改日期和时间</a><br>6、<a href="https://segmentfault.com/a/1190000008321057" target="_blank" rel="external">Vim与Markdown共舞</a><br>7、<a href="http://blog.csdn.net/zcube/article/details/42298419" target="_blank" rel="external">NERD_commenter安装和使用</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list">
+			 
+        <li class="article-tag-list-item">
+        	<a href="javascript:void(0)" class="article-tag-list-link color4">vim</a>
+        </li>
+      
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http:https:/jungleeee.github.io.git/2017/09/12/vim-plug-in/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/15/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
+  
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Jungle
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true,
+		root: "/",
+		innerArchive: true,
+		showTags: true
+	}
+</script>
+
+<script>
+!function(t){function n(r){if(e[r])return e[r].exports;var o=e[r]={exports:{},id:r,loaded:!1};return t[r].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var e={};return n.m=t,n.c=e,n.p="/",n(0)}([function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}function o(t,n){var e=/\/|index.html/g;return t.replace(e,"")===n.replace(e,"")}function i(){for(var t=document.querySelectorAll(".js-header-menu li a"),n=window.location.pathname,e=0,r=t.length;e<r;e++){var i=t[e];o(n,i.getAttribute("href"))&&(0,d.default)(i,"active")}}function u(t){for(var n=t.offsetLeft,e=t.offsetParent;null!==e;)n+=e.offsetLeft,e=e.offsetParent;return n}function f(t){for(var n=t.offsetTop,e=t.offsetParent;null!==e;)n+=e.offsetTop,e=e.offsetParent;return n}function c(t,n,e,r,o){var i=u(t),c=f(t)-n;if(c-e<=o){var a=t.$newDom;a||(a=t.cloneNode(!0),(0,h.default)(t,a),t.$newDom=a,a.style.position="fixed",a.style.top=(e||c)+"px",a.style.left=i+"px",a.style.zIndex=r||2,a.style.width="100%",a.style.color="#fff"),a.style.visibility="visible",t.style.visibility="hidden"}else{t.style.visibility="visible";var s=t.$newDom;s&&(s.style.visibility="hidden")}}function a(){var t=document.querySelector(".js-overlay"),n=document.querySelector(".js-header-menu");c(t,document.body.scrollTop,-63,2,0),c(n,document.body.scrollTop,1,3,0)}function s(){document.querySelector("#container").addEventListener("scroll",function(t){a()}),window.addEventListener("scroll",function(t){a()}),a()}function l(){x.default.versions.mobile&&window.screen.width<800&&(i(),s())}var p=e(71),d=r(p),v=e(72),y=(r(v),e(84)),h=r(y),b=e(69),x=r(b),m=e(75),g=r(m),w=e(70);l(),(0,w.addLoadEvent)(function(){g.default.init()}),t.exports={}},function(t,n){var e=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=e)},function(t,n){var e={}.hasOwnProperty;t.exports=function(t,n){return e.call(t,n)}},function(t,n,e){var r=e(49),o=e(15);t.exports=function(t){return r(o(t))}},function(t,n,e){t.exports=!e(8)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n,e){var r=e(6),o=e(12);t.exports=e(4)?function(t,n,e){return r.f(t,n,o(1,e))}:function(t,n,e){return t[n]=e,t}},function(t,n,e){var r=e(10),o=e(30),i=e(24),u=Object.defineProperty;n.f=e(4)?Object.defineProperty:function(t,n,e){if(r(t),n=i(n,!0),r(e),o)try{return u(t,n,e)}catch(t){}if("get"in e||"set"in e)throw TypeError("Accessors not supported!");return"value"in e&&(t[n]=e.value),t}},function(t,n,e){var r=e(22)("wks"),o=e(13),i=e(1).Symbol,u="function"==typeof i,f=t.exports=function(t){return r[t]||(r[t]=u&&i[t]||(u?i:o)("Symbol."+t))};f.store=r},function(t,n){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,n,e){var r=e(35),o=e(16);t.exports=Object.keys||function(t){return r(t,o)}},function(t,n,e){var r=e(11);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n){var e=0,r=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++e+r).toString(36))}},function(t,n){var e=t.exports={version:"2.4.0"};"number"==typeof __e&&(__e=e)},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,n){t.exports={}},function(t,n){t.exports=!0},function(t,n){n.f={}.propertyIsEnumerable},function(t,n,e){var r=e(6).f,o=e(2),i=e(7)("toStringTag");t.exports=function(t,n,e){t&&!o(t=e?t:t.prototype,i)&&r(t,i,{configurable:!0,value:n})}},function(t,n,e){var r=e(22)("keys"),o=e(13);t.exports=function(t){return r[t]||(r[t]=o(t))}},function(t,n,e){var r=e(1),o="__core-js_shared__",i=r[o]||(r[o]={});t.exports=function(t){return i[t]||(i[t]={})}},function(t,n){var e=Math.ceil,r=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?r:e)(t)}},function(t,n,e){var r=e(11);t.exports=function(t,n){if(!r(t))return t;var e,o;if(n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;if("function"==typeof(e=t.valueOf)&&!r(o=e.call(t)))return o;if(!n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;throw TypeError("Can't convert object to primitive value")}},function(t,n,e){var r=e(1),o=e(14),i=e(18),u=e(26),f=e(6).f;t.exports=function(t){var n=o.Symbol||(o.Symbol=i?{}:r.Symbol||{});"_"==t.charAt(0)||t in n||f(n,t,{value:u.f(t)})}},function(t,n,e){n.f=e(7)},function(t,n,e){var r=e(1),o=e(14),i=e(46),u=e(5),f="prototype",c=function(t,n,e){var a,s,l,p=t&c.F,d=t&c.G,v=t&c.S,y=t&c.P,h=t&c.B,b=t&c.W,x=d?o:o[n]||(o[n]={}),m=x[f],g=d?r:v?r[n]:(r[n]||{})[f];d&&(e=n);for(a in e)s=!p&&g&&void 0!==g[a],s&&a in x||(l=s?g[a]:e[a],x[a]=d&&"function"!=typeof g[a]?e[a]:h&&s?i(l,r):b&&g[a]==l?function(t){var n=function(n,e,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(n);case 2:return new t(n,e)}return new t(n,e,r)}return t.apply(this,arguments)};return n[f]=t[f],n}(l):y&&"function"==typeof l?i(Function.call,l):l,y&&((x.virtual||(x.virtual={}))[a]=l,t&c.R&&m&&!m[a]&&u(m,a,l)))};c.F=1,c.G=2,c.S=4,c.P=8,c.B=16,c.W=32,c.U=64,c.R=128,t.exports=c},function(t,n){var e={}.toString;t.exports=function(t){return e.call(t).slice(8,-1)}},function(t,n,e){var r=e(11),o=e(1).document,i=r(o)&&r(o.createElement);t.exports=function(t){return i?o.createElement(t):{}}},function(t,n,e){t.exports=!e(4)&&!e(8)(function(){return 7!=Object.defineProperty(e(29)("div"),"a",{get:function(){return 7}}).a})},function(t,n,e){"use strict";var r=e(18),o=e(27),i=e(36),u=e(5),f=e(2),c=e(17),a=e(51),s=e(20),l=e(58),p=e(7)("iterator"),d=!([].keys&&"next"in[].keys()),v="@@iterator",y="keys",h="values",b=function(){return this};t.exports=function(t,n,e,x,m,g,w){a(e,n,x);var O,S,_,j=function(t){if(!d&&t in A)return A[t];switch(t){case y:return function(){return new e(this,t)};case h:return function(){return new e(this,t)}}return function(){return new e(this,t)}},P=n+" Iterator",E=m==h,M=!1,A=t.prototype,T=A[p]||A[v]||m&&A[m],L=T||j(m),N=m?E?j("entries"):L:void 0,C="Array"==n?A.entries||T:T;if(C&&(_=l(C.call(new t)),_!==Object.prototype&&(s(_,P,!0),r||f(_,p)||u(_,p,b))),E&&T&&T.name!==h&&(M=!0,L=function(){return T.call(this)}),r&&!w||!d&&!M&&A[p]||u(A,p,L),c[n]=L,c[P]=b,m)if(O={values:E?L:j(h),keys:g?L:j(y),entries:N},w)for(S in O)S in A||i(A,S,O[S]);else o(o.P+o.F*(d||M),n,O);return O}},function(t,n,e){var r=e(10),o=e(55),i=e(16),u=e(21)("IE_PROTO"),f=function(){},c="prototype",a=function(){var t,n=e(29)("iframe"),r=i.length,o="<",u=">";for(n.style.display="none",e(48).appendChild(n),n.src="javascript:",t=n.contentWindow.document,t.open(),t.write(o+"script"+u+"document.F=Object"+o+"/script"+u),t.close(),a=t.F;r--;)delete a[c][i[r]];return a()};t.exports=Object.create||function(t,n){var e;return null!==t?(f[c]=r(t),e=new f,f[c]=null,e[u]=t):e=a(),void 0===n?e:o(e,n)}},function(t,n,e){var r=e(35),o=e(16).concat("length","prototype");n.f=Object.getOwnPropertyNames||function(t){return r(t,o)}},function(t,n){n.f=Object.getOwnPropertySymbols},function(t,n,e){var r=e(2),o=e(3),i=e(45)(!1),u=e(21)("IE_PROTO");t.exports=function(t,n){var e,f=o(t),c=0,a=[];for(e in f)e!=u&&r(f,e)&&a.push(e);for(;n.length>c;)r(f,e=n[c++])&&(~i(a,e)||a.push(e));return a}},function(t,n,e){t.exports=e(5)},function(t,n,e){var r=e(15);t.exports=function(t){return Object(r(t))}},function(t,n,e){t.exports={default:e(41),__esModule:!0}},function(t,n,e){t.exports={default:e(42),__esModule:!0}},function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}n.__esModule=!0;var o=e(39),i=r(o),u=e(38),f=r(u),c="function"==typeof f.default&&"symbol"==typeof i.default?function(t){return typeof t}:function(t){return t&&"function"==typeof f.default&&t.constructor===f.default&&t!==f.default.prototype?"symbol":typeof t};n.default="function"==typeof f.default&&"symbol"===c(i.default)?function(t){return"undefined"==typeof t?"undefined":c(t)}:function(t){return t&&"function"==typeof f.default&&t.constructor===f.default&&t!==f.default.prototype?"symbol":"undefined"==typeof t?"undefined":c(t)}},function(t,n,e){e(65),e(63),e(66),e(67),t.exports=e(14).Symbol},function(t,n,e){e(64),e(68),t.exports=e(26).f("iterator")},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n){t.exports=function(){}},function(t,n,e){var r=e(3),o=e(61),i=e(60);t.exports=function(t){return function(n,e,u){var f,c=r(n),a=o(c.length),s=i(u,a);if(t&&e!=e){for(;a>s;)if(f=c[s++],f!=f)return!0}else for(;a>s;s++)if((t||s in c)&&c[s]===e)return t||s||0;return!t&&-1}}},function(t,n,e){var r=e(43);t.exports=function(t,n,e){if(r(t),void 0===n)return t;switch(e){case 1:return function(e){return t.call(n,e)};case 2:return function(e,r){return t.call(n,e,r)};case 3:return function(e,r,o){return t.call(n,e,r,o)}}return function(){return t.apply(n,arguments)}}},function(t,n,e){var r=e(9),o=e(34),i=e(19);t.exports=function(t){var n=r(t),e=o.f;if(e)for(var u,f=e(t),c=i.f,a=0;f.length>a;)c.call(t,u=f[a++])&&n.push(u);return n}},function(t,n,e){t.exports=e(1).document&&document.documentElement},function(t,n,e){var r=e(28);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==r(t)?t.split(""):Object(t)}},function(t,n,e){var r=e(28);t.exports=Array.isArray||function(t){return"Array"==r(t)}},function(t,n,e){"use strict";var r=e(32),o=e(12),i=e(20),u={};e(5)(u,e(7)("iterator"),function(){return this}),t.exports=function(t,n,e){t.prototype=r(u,{next:o(1,e)}),i(t,n+" Iterator")}},function(t,n){t.exports=function(t,n){return{value:n,done:!!t}}},function(t,n,e){var r=e(9),o=e(3);t.exports=function(t,n){for(var e,i=o(t),u=r(i),f=u.length,c=0;f>c;)if(i[e=u[c++]]===n)return e}},function(t,n,e){var r=e(13)("meta"),o=e(11),i=e(2),u=e(6).f,f=0,c=Object.isExtensible||function(){return!0},a=!e(8)(function(){return c(Object.preventExtensions({}))}),s=function(t){u(t,r,{value:{i:"O"+ ++f,w:{}}})},l=function(t,n){if(!o(t))return"symbol"==typeof t?t:("string"==typeof t?"S":"P")+t;if(!i(t,r)){if(!c(t))return"F";if(!n)return"E";s(t)}return t[r].i},p=function(t,n){if(!i(t,r)){if(!c(t))return!0;if(!n)return!1;s(t)}return t[r].w},d=function(t){return a&&v.NEED&&c(t)&&!i(t,r)&&s(t),t},v=t.exports={KEY:r,NEED:!1,fastKey:l,getWeak:p,onFreeze:d}},function(t,n,e){var r=e(6),o=e(10),i=e(9);t.exports=e(4)?Object.defineProperties:function(t,n){o(t);for(var e,u=i(n),f=u.length,c=0;f>c;)r.f(t,e=u[c++],n[e]);return t}},function(t,n,e){var r=e(19),o=e(12),i=e(3),u=e(24),f=e(2),c=e(30),a=Object.getOwnPropertyDescriptor;n.f=e(4)?a:function(t,n){if(t=i(t),n=u(n,!0),c)try{return a(t,n)}catch(t){}if(f(t,n))return o(!r.f.call(t,n),t[n])}},function(t,n,e){var r=e(3),o=e(33).f,i={}.toString,u="object"==typeof window&&window&&Object.getOwnPropertyNames?Object.getOwnPropertyNames(window):[],f=function(t){try{return o(t)}catch(t){return u.slice()}};t.exports.f=function(t){return u&&"[object Window]"==i.call(t)?f(t):o(r(t))}},function(t,n,e){var r=e(2),o=e(37),i=e(21)("IE_PROTO"),u=Object.prototype;t.exports=Object.getPrototypeOf||function(t){return t=o(t),r(t,i)?t[i]:"function"==typeof t.constructor&&t instanceof t.constructor?t.constructor.prototype:t instanceof Object?u:null}},function(t,n,e){var r=e(23),o=e(15);t.exports=function(t){return function(n,e){var i,u,f=String(o(n)),c=r(e),a=f.length;return c<0||c>=a?t?"":void 0:(i=f.charCodeAt(c),i<55296||i>56319||c+1===a||(u=f.charCodeAt(c+1))<56320||u>57343?t?f.charAt(c):i:t?f.slice(c,c+2):(i-55296<<10)+(u-56320)+65536)}}},function(t,n,e){var r=e(23),o=Math.max,i=Math.min;t.exports=function(t,n){return t=r(t),t<0?o(t+n,0):i(t,n)}},function(t,n,e){var r=e(23),o=Math.min;t.exports=function(t){return t>0?o(r(t),9007199254740991):0}},function(t,n,e){"use strict";var r=e(44),o=e(52),i=e(17),u=e(3);t.exports=e(31)(Array,"Array",function(t,n){this._t=u(t),this._i=0,this._k=n},function(){var t=this._t,n=this._k,e=this._i++;return!t||e>=t.length?(this._t=void 0,o(1)):"keys"==n?o(0,e):"values"==n?o(0,t[e]):o(0,[e,t[e]])},"values"),i.Arguments=i.Array,r("keys"),r("values"),r("entries")},function(t,n){},function(t,n,e){"use strict";var r=e(59)(!0);e(31)(String,"String",function(t){this._t=String(t),this._i=0},function(){var t,n=this._t,e=this._i;return e>=n.length?{value:void 0,done:!0}:(t=r(n,e),this._i+=t.length,{value:t,done:!1})})},function(t,n,e){"use strict";var r=e(1),o=e(2),i=e(4),u=e(27),f=e(36),c=e(54).KEY,a=e(8),s=e(22),l=e(20),p=e(13),d=e(7),v=e(26),y=e(25),h=e(53),b=e(47),x=e(50),m=e(10),g=e(3),w=e(24),O=e(12),S=e(32),_=e(57),j=e(56),P=e(6),E=e(9),M=j.f,A=P.f,T=_.f,L=r.Symbol,N=r.JSON,C=N&&N.stringify,k="prototype",F=d("_hidden"),q=d("toPrimitive"),I={}.propertyIsEnumerable,B=s("symbol-registry"),D=s("symbols"),W=s("op-symbols"),H=Object[k],K="function"==typeof L,R=r.QObject,J=!R||!R[k]||!R[k].findChild,U=i&&a(function(){return 7!=S(A({},"a",{get:function(){return A(this,"a",{value:7}).a}})).a})?function(t,n,e){var r=M(H,n);r&&delete H[n],A(t,n,e),r&&t!==H&&A(H,n,r)}:A,G=function(t){var n=D[t]=S(L[k]);return n._k=t,n},$=K&&"symbol"==typeof L.iterator?function(t){return"symbol"==typeof t}:function(t){return t instanceof L},z=function(t,n,e){return t===H&&z(W,n,e),m(t),n=w(n,!0),m(e),o(D,n)?(e.enumerable?(o(t,F)&&t[F][n]&&(t[F][n]=!1),e=S(e,{enumerable:O(0,!1)})):(o(t,F)||A(t,F,O(1,{})),t[F][n]=!0),U(t,n,e)):A(t,n,e)},Y=function(t,n){m(t);for(var e,r=b(n=g(n)),o=0,i=r.length;i>o;)z(t,e=r[o++],n[e]);return t},Q=function(t,n){return void 0===n?S(t):Y(S(t),n)},X=function(t){var n=I.call(this,t=w(t,!0));return!(this===H&&o(D,t)&&!o(W,t))&&(!(n||!o(this,t)||!o(D,t)||o(this,F)&&this[F][t])||n)},V=function(t,n){if(t=g(t),n=w(n,!0),t!==H||!o(D,n)||o(W,n)){var e=M(t,n);return!e||!o(D,n)||o(t,F)&&t[F][n]||(e.enumerable=!0),e}},Z=function(t){for(var n,e=T(g(t)),r=[],i=0;e.length>i;)o(D,n=e[i++])||n==F||n==c||r.push(n);return r},tt=function(t){for(var n,e=t===H,r=T(e?W:g(t)),i=[],u=0;r.length>u;)!o(D,n=r[u++])||e&&!o(H,n)||i.push(D[n]);return i};K||(L=function(){if(this instanceof L)throw TypeError("Symbol is not a constructor!");var t=p(arguments.length>0?arguments[0]:void 0),n=function(e){this===H&&n.call(W,e),o(this,F)&&o(this[F],t)&&(this[F][t]=!1),U(this,t,O(1,e))};return i&&J&&U(H,t,{configurable:!0,set:n}),G(t)},f(L[k],"toString",function(){return this._k}),j.f=V,P.f=z,e(33).f=_.f=Z,e(19).f=X,e(34).f=tt,i&&!e(18)&&f(H,"propertyIsEnumerable",X,!0),v.f=function(t){return G(d(t))}),u(u.G+u.W+u.F*!K,{Symbol:L});for(var nt="hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),et=0;nt.length>et;)d(nt[et++]);for(var nt=E(d.store),et=0;nt.length>et;)y(nt[et++]);u(u.S+u.F*!K,"Symbol",{for:function(t){return o(B,t+="")?B[t]:B[t]=L(t)},keyFor:function(t){if($(t))return h(B,t);throw TypeError(t+" is not a symbol!")},useSetter:function(){J=!0},useSimple:function(){J=!1}}),u(u.S+u.F*!K,"Object",{create:Q,defineProperty:z,defineProperties:Y,getOwnPropertyDescriptor:V,getOwnPropertyNames:Z,getOwnPropertySymbols:tt}),N&&u(u.S+u.F*(!K||a(function(){var t=L();return"[null]"!=C([t])||"{}"!=C({a:t})||"{}"!=C(Object(t))})),"JSON",{stringify:function(t){if(void 0!==t&&!$(t)){for(var n,e,r=[t],o=1;arguments.length>o;)r.push(arguments[o++]);return n=r[1],"function"==typeof n&&(e=n),!e&&x(n)||(n=function(t,n){if(e&&(n=e.call(this,t,n)),!$(n))return n}),r[1]=n,C.apply(N,r)}}}),L[k][q]||e(5)(L[k],q,L[k].valueOf),l(L,"Symbol"),l(Math,"Math",!0),l(r.JSON,"JSON",!0)},function(t,n,e){e(25)("asyncIterator")},function(t,n,e){e(25)("observable")},function(t,n,e){e(62);for(var r=e(1),o=e(5),i=e(17),u=e(7)("toStringTag"),f=["NodeList","DOMTokenList","MediaList","StyleSheetList","CSSRuleList"],c=0;c<5;c++){var a=f[c],s=r[a],l=s&&s.prototype;l&&!l[u]&&o(l,u,a),i[a]=i.Array}},function(t,n){"use strict";var e={versions:function(){var t=window.navigator.userAgent;return{trident:t.indexOf("Trident")>-1,presto:t.indexOf("Presto")>-1,webKit:t.indexOf("AppleWebKit")>-1,gecko:t.indexOf("Gecko")>-1&&t.indexOf("KHTML")==-1,mobile:!!t.match(/AppleWebKit.*Mobile.*/),ios:!!t.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),android:t.indexOf("Android")>-1||t.indexOf("Linux")>-1,iPhone:t.indexOf("iPhone")>-1||t.indexOf("Mac")>-1,iPad:t.indexOf("iPad")>-1,webApp:t.indexOf("Safari")==-1,weixin:t.indexOf("MicroMessenger")==-1}}()};t.exports=e},function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}var o=e(40),i=r(o),u=function(){function t(t,n,e){return n||e?String.fromCharCode(n||e):o[t]||t}function n(t){return l[t]}var e=/&quot;|&lt;|&gt;|&amp;|&nbsp;|&apos;|&#(\d+);|&#(\d+)/g,r=/['<> "&]/g,o={"&quot;":'"',"&lt;":"<","&gt;":">","&amp;":"&","&nbsp;":" "},f=/\u00a0/g,c=/<br\s*\/?>/gi,a=/\r?\n/g,s=/\s/g,l={};for(var p in o)l[o[p]]=p;return o["&apos;"]="'",l["'"]="&#39;",{encode:function(t){return t?(""+t).replace(r,n).replace(a,"<br/>").replace(s,"&nbsp;"):""},decode:function(n){return n?(""+n).replace(c,"\n").replace(e,t).replace(f," "):""},encodeBase16:function(t){if(!t)return t;t+="";for(var n=[],e=0,r=t.length;r>e;e++)n.push(t.charCodeAt(e).toString(16).toUpperCase());return n.join("")},encodeBase16forJSON:function(t){if(!t)return t;t=t.replace(/[\u4E00-\u9FBF]/gi,function(t){return escape(t).replace("%u","\\u")});for(var n=[],e=0,r=t.length;r>e;e++)n.push(t.charCodeAt(e).toString(16).toUpperCase());return n.join("")},decodeBase16:function(t){if(!t)return t;t+="";for(var n=[],e=0,r=t.length;r>e;e+=2)n.push(String.fromCharCode("0x"+t.slice(e,e+2)));return n.join("")},encodeObject:function(t){if(t instanceof Array)for(var n=0,e=t.length;e>n;n++)t[n]=u.encodeObject(t[n]);else if("object"==("undefined"==typeof t?"undefined":(0,i.default)(t)))for(var r in t)t[r]=u.encodeObject(t[r]);else if("string"==typeof t)return u.encode(t);return t},loadScript:function(t){var n=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(n),n.setAttribute("src",t)},addLoadEvent:function(t){var n=window.onload;"function"!=typeof window.onload?window.onload=t:window.onload=function(){n(),t()}}}}();t.exports=u},function(t,n){function e(t,n){t.classList?t.classList.add(n):t.className+=" "+n}t.exports=e},function(t,n){function e(t,n){if(t.classList)t.classList.remove(n);else{var e=new RegExp("(^|\\b)"+n.split(" ").join("|")+"(\\b|$)","gi");t.className=t.className.replace(e," ")}}t.exports=e},,,function(t,n){"use strict";function e(){var t=document.querySelector("#page-nav");if(t&&!document.querySelector("#page-nav .extend.prev")&&(t.innerHTML='<a class="extend prev disabled" rel="prev">&laquo; Prev</a>'+t.innerHTML),t&&!document.querySelector("#page-nav .extend.next")&&(t.innerHTML=t.innerHTML+'<a class="extend next disabled" rel="next">Next &raquo;</a>'),yiliaConfig&&yiliaConfig.open_in_new){var n=document.querySelectorAll(".article-entry a:not(.article-more-a)");n.forEach(function(t){t.setAttribute("target","_blank")})}var e=document.querySelector("#js-aboutme");e&&0!==e.length&&(e.innerHTML=e.innerText)}t.exports={init:e}},,,,,,,,,function(t,n){function e(t,n){if("string"==typeof n)return t.insertAdjacentHTML("afterend",n);var e=t.nextSibling;return e?t.parentNode.insertBefore(n,e):t.parentNode.appendChild(n)}t.exports=e}]);
+</script>
+<script src="/main.68ab53.js"></script>
+<script>
+(function() {
+	var loadScript = function(path) {
+	    var $script = document.createElement('script')
+	    document.getElementsByTagName('body')[0].appendChild($script)
+	    $script.setAttribute('src', path)
+	}
+	loadScript("/slider.fa3fc2.js")
+})();
+</script>
+
+
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+    
+      
+      
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">文章</a></li>
+      
+        
+      
+        
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="color4">vim</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">【巧变】&lt;br&gt;福祸相依，姑且看之。&lt;br&gt;万物皆有变幻，岂能长久乎！&lt;br&gt;&lt;br&gt;【阵亡】&lt;br&gt;征战数载，竟被暗箭所伤。</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
