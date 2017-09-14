@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https:/jungleeee.github.io.git">
-  <title>STM32(Cortex-M4) Timer-DMA WS2812-GRB-LED | Jungle&#39;s Blog</title>
+  <title>STM32(Cortex-M4) 定时器-DMA WS2812-GRB-LED | Jungle&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="前言1学习、总结，交流，进步！ 测试环境为Keil 5.20 &amp;amp;&amp;amp; (STM32F405ZET6 || STM32F407ZET6)。DMA 就不解释了；这里用来控制WS2812-GRB全彩LED，主要是因为其控制时序要求较高，频率快。如果使用中断的方式，处理时序容易出错。 原创，转载请注明出处。  关于WS28212说明WS2812实际可以认为有红、蓝、绿三个LED组成，通过控制">
 <meta name="keywords" content="STM32">
 <meta property="og:type" content="article">
-<meta property="og:title" content="STM32(Cortex-M4) Timer-DMA WS2812-GRB-LED">
+<meta property="og:title" content="STM32(Cortex-M4) 定时器-DMA WS2812-GRB-LED">
 <meta property="og:url" content="https:/jungleeee.github.io.git/2017/09/14/stm32-timer-dma/index.html">
 <meta property="og:site_name" content="Jungle&#39;s Blog">
 <meta property="og:description" content="前言1学习、总结，交流，进步！ 测试环境为Keil 5.20 &amp;amp;&amp;amp; (STM32F405ZET6 || STM32F407ZET6)。DMA 就不解释了；这里用来控制WS2812-GRB全彩LED，主要是因为其控制时序要求较高，频率快。如果使用中断的方式，处理时序容易出错。 原创，转载请注明出处。  关于WS28212说明WS2812实际可以认为有红、蓝、绿三个LED组成，通过控制">
 <meta property="og:image" content="https:/picture/img/stm32-timer-dma/1_ws2812_data.png">
 <meta property="og:image" content="https:/picture/img/stm32-timer-dma/2_ws2812_01code.png">
-<meta property="og:updated_time" content="2017-09-14T09:16:20.838Z">
+<meta property="og:updated_time" content="2017-09-14T09:46:49.890Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="STM32(Cortex-M4) Timer-DMA WS2812-GRB-LED">
+<meta name="twitter:title" content="STM32(Cortex-M4) 定时器-DMA WS2812-GRB-LED">
 <meta name="twitter:description" content="前言1学习、总结，交流，进步！ 测试环境为Keil 5.20 &amp;amp;&amp;amp; (STM32F405ZET6 || STM32F407ZET6)。DMA 就不解释了；这里用来控制WS2812-GRB全彩LED，主要是因为其控制时序要求较高，频率快。如果使用中断的方式，处理时序容易出错。 原创，转载请注明出处。  关于WS28212说明WS2812实际可以认为有红、蓝、绿三个LED组成，通过控制">
 <meta name="twitter:image" content="https:/picture/img/stm32-timer-dma/1_ws2812_data.png">
   
@@ -148,13 +148,13 @@
         
   
     <h1 class="article-title" itemprop="name">
-      STM32(Cortex-M4) Timer-DMA WS2812-GRB-LED
+      STM32(Cortex-M4) 定时器-DMA WS2812-GRB-LED
     </h1>
   
 
         
         <a href="/2017/09/14/stm32-timer-dma/" class="archive-article-date">
-  	<time datetime="2017-09-14T09:16:20.842Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-14</time>
+  	<time datetime="2017-09-14T09:46:49.898Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-14</time>
 </a>
         
       </header>
@@ -166,10 +166,14 @@
 <p>原创，转载请注明出处。</p>
 <hr>
 <h3 id="关于WS28212说明"><a href="#关于WS28212说明" class="headerlink" title="关于WS28212说明"></a>关于WS28212说明</h3><p>WS2812实际可以认为有红、蓝、绿三个LED组成，通过控制其中的灯是否点亮以及点亮时的光照强度的不同组合，实现更多色彩的显示。<br>因此控制WS2812色彩显示的时候需要控制“三个LED”，总共包含24bit的控制数据，红、蓝、绿各8bit；由于8bit数据表示范围为0-255，所以光照强度可以分成256各等级。<br>24bit数据格式如下图所示：</p>
+<a id="more"></a>
 <p><img src="/picture/img/stm32-timer-dma/1_ws2812_data.png" alt="ws2812_data_format"></p>
 <p>前面提到0-255表示该原色的亮度，因此就需要改变8bit数据的0/1状态，其0码和1码的格式如下图所示：</p>
 <p><img src="/picture/img/stm32-timer-dma/2_ws2812_01code.png" alt="ws2812_0_1_code"></p>
-<p>从图中可以看到0码/1码是在固定周期中高低电平时间不同的组合。整个周期时长1.25us左右，允许误差600ns。虽然STM32指令周期很短了，但是使用中断方式的话，明显不是很好。所以选用DMA的方式。</p>
+<p>从图中可以看到0码/1码是在固定周期中高低电平时间不同的组合。整个周期时长1.25us左右，允许误差600ns。虽然STM32指令周期很短了，但是使用中断方式的话，明显不是很好。</p>
+<hr>
+<h3 id="Timer-DMA"><a href="#Timer-DMA" class="headerlink" title="Timer-DMA"></a>Timer-DMA</h3><p>请注意以下几点：<br>1、关于STM32定时器色的DMA功能，需要注意的时TIM9-TMI14(100pin封装)是没有DMA功能的，所以在做硬件设计时需要注意。<br>2、请注意定时器所挂载的时钟频率：TIM2、3、4、5、6、7、12、13、14使用APB1时钟；TIM1、8、9使用APB2时钟。<br>3、关于如何使用定时器输出PWM波，此处不介绍。</p>
+<p>接下来开始程序搭建：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
 
       
 
