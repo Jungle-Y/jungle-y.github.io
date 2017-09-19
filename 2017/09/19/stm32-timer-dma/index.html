@@ -21,7 +21,7 @@
 <meta property="og:image" content="https:/picture/img/stm32-timer-dma/6_timer.png">
 <meta property="og:image" content="https:/picture/img/stm32-timer-dma/3_timer_dma.png">
 <meta property="og:image" content="https:/picture/img/stm32-timer-dma/4_dma.png">
-<meta property="og:updated_time" content="2017-09-19T06:34:57.551Z">
+<meta property="og:updated_time" content="2017-09-19T06:45:34.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STM32(Cortex-M4) 定时器-DMA WS2812-GRB-LED">
 <meta name="twitter:description" content="前言1学习、总结，交流，进步！ 测试环境为Keil 5.20 &amp;amp;&amp;amp; (STM32F405ZET6 || STM32F407ZET6)。采用来控制WS2812-GRB全彩LED，主要是因为其控制时序要求较高，频率快。如果使用中断的方式，处理时序容易出错。 原创，转载请注明出处。  关于WS28212说明WS2812实际可以认为有红、蓝、绿三个LED组成，通过控制其中的灯是否点亮以及点">
@@ -158,7 +158,7 @@
 
         
         <a href="/2017/09/19/stm32-timer-dma/" class="archive-article-date">
-  	<time datetime="2017-09-19T06:34:57.555Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-19</time>
+  	<time datetime="2017-09-19T06:45:34.788Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-19</time>
 </a>
         
       </header>
@@ -192,7 +192,7 @@
 <h3 id="ws2812-控制"><a href="#ws2812-控制" class="headerlink" title="ws2812 控制"></a>ws2812 控制</h3><p>这里就简单说明以下。通过前面分析，知道了通过写入捕获比较寄存器的值(34/71)，实现0/1的位输出，所以定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">                        |g7|g6|g5|g4|g3|g2|g1|g0|r7|r6|r5|r4|r3|r2|r1|r0|b7|b6|b5|b4|b3|b2|b1|b0|</div><div class="line">unsigned char green[] = &#123;71,71,71,71,71,71,71,71,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,0&#125;; /* 11111111 00000000 00000000 */</div><div class="line">unsigned char red[]   = &#123;34,34,34,34,34,34,34,34,71,71,71,71,71,71,71,71,34,34,34,34,34,34,34,34,0&#125;;</div><div class="line">unsigned char blue[]  = &#123;34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,71,71,71,71,71,71,71,71,0&#125;;</div><div class="line">unsigned char white[] = &#123;71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,0&#125;;</div><div class="line">unsigned char reset[50] = &#123;0&#125;;  /* 复位需要长达50us的低电平时间 */</div></pre></td></tr></table></figure></p>
 <p>在实际控制中，只需要配置好需要的颜色，将数组的起始地址设置为DMA的内存地址后启动DMA即可。如果上一次操作完成后关闭了定时器，请记得打开。<br>有一点需要注意以下，上面每个数组实际上都定义了25个成员，最后一个都为0。<br>是因为DMA传输完成后，捕获/比较寄存器的值是最后一次传输的值，34/71，如果没有关闭定时器，那么定时器就会一直输出0码/1码(对于WS2812)，也就是WS2812的状态会变成全部熄灭(全0)/全亮(全1)，导致出错，所以DMA最后一次发送0到捕获/比较寄存器中，使得PWM输出一直为低。<br>WS2812技术文档有说到输出低电平50us会复位，但在实际使用中发现，前一刻的状态并不会被改变，也就是说全输出为低电平时能够保持之前状态，经测试可行。<br>上面提到了两种方式：1、传输完成后，在DMA传输完成中断函数中关闭定时器，下一次传输前打开定时器。！！！！！此方式未测试！！！！！！<br>                    2、DMA传输最后一次数据到捕获/比较寄存器的值设置为0，通过输出低电平保持前一刻的状态。实测可行。</p>
 <p>参考程序：<a href="https://github.com/jungleeee/Cortex-M/tree/master/Cortex-M4/timer-dma" target="_blank" rel="external">https://github.com/jungleeee/Cortex-M/tree/master/Cortex-M4/timer-dma</a></p>
-<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>工作当中有这个LED的功能需求，在开发过程中还是遇到了一些问题，认认真真的看了TIMx-DMA着一块，还是有一些需要注意的东西。<br>比如一开始选择DMA通道的时候，因为PWM输出时TIM5的通道2，就选择了DMA通道TIM5_CH2，实际应该是TIM5_UP，导致出错。<br>还有一点是DMA发送完成后，传输完成位，会置位，如果配置了传输完成中断，可以在中断中清除此位，没有配置中断的话，必须在下一次发送前清除此位，否则下一次传输会失败。<br><img src="/picture/img/stm32-timer-dma/4_dma.png" alt="4_dma"><br>记录，分享！</p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>工作当中有这个LED的功能需求，在开发过程中还是遇到了一些问题，认认真真的看了TIMx-DMA着一块，还是有一些需要注意的东西。<br>比如一开始选择DMA通道的时候，因为PWM输出时TIM5的通道2，就选择了DMA通道TIM5_CH2，实际应该是TIM5_UP，导致出错。<br>还有一点是DMA发送完成后，传输完成位，会置位，如果配置了传输完成中断，可以在中断中清除此位，没有配置中断的话，必须在下一次发送前清除此位，否则下一次传输会失败。<br><img src="/picture/img/stm32-timer-dma/4_dma.png" alt="4_dma"></p>
 
       
 
@@ -276,18 +276,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/09/19/stm32-clock/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          STM32(Cortex-M4) 时钟配置
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/09/14/vim-plug-in/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">vim 常用插件配置</div>
+    <a href="/2017/09/19/stm32-clock/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">STM32(Cortex-M4) 时钟配置</div>
       <i class="icon-circle-right"></i>
     </a>
   
