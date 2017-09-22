@@ -135,20 +135,20 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-stm32-timer-dma" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-stm32-clock" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/19/stm32-timer-dma/">STM32(Cortex-M4) 定时器-DMA WS2812-GRB-LED</a>
+      <a class="article-title" href="/2017/09/22/stm32-clock/">STM32(Cortex-M4) 时钟配置</a>
     </h1>
   
 
         
-        <a href="/2017/09/19/stm32-timer-dma/" class="archive-article-date">
-  	<time datetime="2017-09-19T06:45:34.788Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-19</time>
+        <a href="/2017/09/22/stm32-clock/" class="archive-article-date">
+  	<time datetime="2017-09-22T03:18:51.462Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-22</time>
 </a>
         
       </header>
@@ -156,12 +156,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">学习、总结，交流，进步！</div></pre></td></tr></table></figure>
-<p>测试环境为Keil 5.20 &amp;&amp; (STM32F405ZET6 || STM32F407ZET6)。<br>采用来控制WS2812-GRB全彩LED，主要是因为其控制时序要求较高，频率快。如果使用中断的方式，处理时序容易出错。</p>
+<p>测试环境为Keil 5.20 &amp;&amp; (STM32F405ZET6 || STM32F407ZET6)。<br>外部晶振频率不同，就需要配置时钟以此获知各外设的时钟频率，比如常用的定时器。</p>
 <p>原创，转载请注明出处。</p>
 <hr>
-<h3 id="关于WS28212说明"><a href="#关于WS28212说明" class="headerlink" title="关于WS28212说明"></a>关于WS28212说明</h3><p>WS2812实际可以认为有红、蓝、绿三个LED组成，通过控制其中的灯是否点亮以及点亮时的光照强度的不同组合，实现更多色彩的显示(三原色原理)。<br>因此控制WS2812色彩显示的时候需要控制“三个LED”，总共包含24bit的控制数据，红、蓝、绿各8bit；由于8bit数据表示范围为0-255，所以光照强度可以分成256各等级。<br>24bit数据格式如下图所示：</p>
+<h3 id="时钟树介绍"><a href="#时钟树介绍" class="headerlink" title="时钟树介绍"></a>时钟树介绍</h3><p>介绍时钟配置之前，安利一个ST的针对于STM32提供的一个软件，STM32CubeMX，常用来进行硬件选型，外设资源分配以及可以进行配置生成基于HAL库的配置程序等功能。<br>当然了，大多数都应该知道这个软件，就不赘述了。其中还有一个功能是提供时钟树的配置，配置后可以直观的看到各个部分/外设的工作时钟，个人觉得挺好的，如下图所示：</p>
         
-          <a class="article-more-a" href="/2017/09/19/stm32-timer-dma/#more">Read More >></a>
+          <a class="article-more-a" href="/2017/09/22/stm32-clock/#more">Read More >></a>
         
       
 
@@ -199,20 +199,20 @@
 
 
   
-    <article id="post-stm32-clock" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-stm32-timer-dma" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/19/stm32-clock/">STM32(Cortex-M4) 时钟配置</a>
+      <a class="article-title" href="/2017/09/19/stm32-timer-dma/">STM32(Cortex-M4) 定时器-DMA WS2812-GRB-LED</a>
     </h1>
   
 
         
-        <a href="/2017/09/19/stm32-clock/" class="archive-article-date">
-  	<time datetime="2017-09-19T06:44:24.879Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-19</time>
+        <a href="/2017/09/19/stm32-timer-dma/" class="archive-article-date">
+  	<time datetime="2017-09-19T06:45:34.788Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-19</time>
 </a>
         
       </header>
@@ -220,12 +220,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">学习、总结，交流，进步！</div></pre></td></tr></table></figure>
-<p>测试环境为Keil 5.20 &amp;&amp; (STM32F405ZET6 || STM32F407ZET6)。<br>外部晶振频率不同，就需要配置时钟以此获知各外设的时钟频率，比如常用的定时器。</p>
+<p>测试环境为Keil 5.20 &amp;&amp; (STM32F405ZET6 || STM32F407ZET6)。<br>采用来控制WS2812-GRB全彩LED，主要是因为其控制时序要求较高，频率快。如果使用中断的方式，处理时序容易出错。</p>
 <p>原创，转载请注明出处。</p>
 <hr>
-<h3 id="时钟树介绍"><a href="#时钟树介绍" class="headerlink" title="时钟树介绍"></a>时钟树介绍</h3><p>介绍时钟配置之前，安利一个ST的针对于STM32提供的一个软件，STM32CubeMX，常用来进行硬件选型，外设资源分配以及可以进行配置生成基于HAL库的配置程序等功能。<br>当然了，大多数都应该知道这个软件，就不赘述了。其中还有一个功能是提供时钟树的配置，配置后可以直观的看到各个部分/外设的工作时钟，个人觉得挺好的，如下图所示：</p>
+<h3 id="关于WS28212说明"><a href="#关于WS28212说明" class="headerlink" title="关于WS28212说明"></a>关于WS28212说明</h3><p>WS2812实际可以认为有红、蓝、绿三个LED组成，通过控制其中的灯是否点亮以及点亮时的光照强度的不同组合，实现更多色彩的显示(三原色原理)。<br>因此控制WS2812色彩显示的时候需要控制“三个LED”，总共包含24bit的控制数据，红、蓝、绿各8bit；由于8bit数据表示范围为0-255，所以光照强度可以分成256各等级。<br>24bit数据格式如下图所示：</p>
         
-          <a class="article-more-a" href="/2017/09/19/stm32-clock/#more">Read More >></a>
+          <a class="article-more-a" href="/2017/09/19/stm32-timer-dma/#more">Read More >></a>
         
       
 
