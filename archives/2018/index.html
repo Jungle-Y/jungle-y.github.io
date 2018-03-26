@@ -6,21 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https:/jungleeee.github.io.git">
-  <title>STM32(Cortex-M4) 时钟配置 | Jungle&#39;s Blog</title>
+  <title>Archives: 2018 | Jungle&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言1学习、总结，交流，进步！ 测试环境为Keil 5.20 &amp;amp;&amp;amp; (STM32F405ZET6 || STM32F407ZET6)。外部晶振频率不同，就需要配置时钟以此获知各外设的时钟频率，比如常用的定时器。 原创，转载请注明出处。  时钟树介绍介绍时钟配置之前，安利一个ST的针对于STM32提供的一个软件，STM32CubeMX，常用来进行硬件选型，外设资源分配以及可以进行配置">
-<meta name="keywords" content="STM32">
-<meta property="og:type" content="article">
-<meta property="og:title" content="STM32(Cortex-M4) 时钟配置">
-<meta property="og:url" content="https:/jungleeee.github.io.git/2017/09/22/stm32-clock/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Jungle&#39;s Blog">
+<meta property="og:url" content="https:/jungleeee.github.io.git/archives/2018/index.html">
 <meta property="og:site_name" content="Jungle&#39;s Blog">
-<meta property="og:description" content="前言1学习、总结，交流，进步！ 测试环境为Keil 5.20 &amp;amp;&amp;amp; (STM32F405ZET6 || STM32F407ZET6)。外部晶振频率不同，就需要配置时钟以此获知各外设的时钟频率，比如常用的定时器。 原创，转载请注明出处。  时钟树介绍介绍时钟配置之前，安利一个ST的针对于STM32提供的一个软件，STM32CubeMX，常用来进行硬件选型，外设资源分配以及可以进行配置">
-<meta property="og:image" content="https:/picture/img/stm32-clock/1_sysClock.png">
-<meta property="og:updated_time" content="2017-09-22T03:18:51.462Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="STM32(Cortex-M4) 时钟配置">
-<meta name="twitter:description" content="前言1学习、总结，交流，进步！ 测试环境为Keil 5.20 &amp;amp;&amp;amp; (STM32F405ZET6 || STM32F407ZET6)。外部晶振频率不同，就需要配置时钟以此获知各外设的时钟频率，比如常用的定时器。 原创，转载请注明出处。  时钟树介绍介绍时钟配置之前，安利一个ST的针对于STM32提供的一个软件，STM32CubeMX，常用来进行硬件选型，外设资源分配以及可以进行配置">
-<meta name="twitter:image" content="https:/picture/img/stm32-clock/1_sysClock.png">
+<meta name="twitter:title" content="Jungle&#39;s Blog">
   
     <link rel="alternative" href="/atom.xml" title="Jungle&#39;s Blog" type="application/atom+xml">
   
@@ -140,151 +133,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-stm32-clock" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      STM32(Cortex-M4) 时钟配置
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/03/26/freertos-cli/" class="archive-article-date">
+  	<time datetime="2018-03-26T07:23:39.328Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-26</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/03/26/freertos-cli/">STM32命令行调试工具 (FreeRTOS + CLI)</a>
     </h1>
   
 
-        
-        <a href="/2017/09/22/stm32-clock/" class="archive-article-date">
-  	<time datetime="2017-09-22T03:18:51.462Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">学习、总结，交流，进步！</div></pre></td></tr></table></figure>
-<p>测试环境为Keil 5.20 &amp;&amp; (STM32F405ZET6 || STM32F407ZET6)。<br>外部晶振频率不同，就需要配置时钟以此获知各外设的时钟频率，比如常用的定时器。</p>
-<p>原创，转载请注明出处。</p>
-<hr>
-<h3 id="时钟树介绍"><a href="#时钟树介绍" class="headerlink" title="时钟树介绍"></a>时钟树介绍</h3><p>介绍时钟配置之前，安利一个ST的针对于STM32提供的一个软件，STM32CubeMX，常用来进行硬件选型，外设资源分配以及可以进行配置生成基于HAL库的配置程序等功能。<br>当然了，大多数都应该知道这个软件，就不赘述了。其中还有一个功能是提供时钟树的配置，配置后可以直观的看到各个部分/外设的工作时钟，个人觉得挺好的，如下图所示：</p>
-<a id="more"></a>
-<p><img src="/picture/img/stm32-clock/1_sysClock.png" alt="1_sysClock"></p>
-<p>这里简单介绍上图(从左到右)：<br>红色外框：从这里选中HSE(外部时钟)，并配置外部时钟的频率。(我这里外部晶振使用的是8MHz，内部时钟部分自行参考)<br>黑色外框：M N P参数，常说的倍频部分。<br>黄色外框：通过设置倍频系数，得到的系统频率。(系统最大频率，请参考计数文档)<br>绿色外框：AHB 分频得到HCLK频率。<br>蓝色外框：下面两个框分频后得到APB1和APB2的时钟。<br>最后面是到各个外设的工作频率。</p>
-<hr>
-<h3 id="时钟配置"><a href="#时钟配置" class="headerlink" title="时钟配置"></a>时钟配置</h3><p>时钟配置其实最主要的就是设置倍频和分频的系数，很简单。这里就这几个系数在什么位置说明一下，请打开system_stm32f4xx.c文件。<br>这里使用的是F4的库，STM32F4xx_DSP_StdPeriph_Lib_V1.8.0，芯片f405/f407，所以在Keil中定义了STM32F40_41xxx(根据此宏确定该系数的唯一位置)，下面程序是截取system_stm32f4xx.c文件，需要修改的位置在程序中有说明，请仔细查看这一部分。<br>首先我们需要修改外部时钟的频率，改为外部使用的晶振频率，是在系统文件stm32f4xx.h中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @brief In the following line adjust the value of External High Speed oscillator (HSE)</div><div class="line">   used in your application</div><div class="line"></div><div class="line">   Tip: To avoid modifying this file each time you need to use different HSE, you</div><div class="line">        can define the HSE value in your toolchain compiler preprocessor.</div><div class="line">  */</div><div class="line">#if defined(STM32F40_41xxx) || defined(STM32F427_437xx)  || defined(STM32F429_439xx) || defined(STM32F401xx) || \</div><div class="line">    defined(STM32F410xx) || defined(STM32F411xE) || defined(STM32F469_479xx)</div><div class="line"> #if !defined  (HSE_VALUE) /* 修改外部时钟频率，默认25MHz，25000000，我使用8MHz， */</div><div class="line">  #define HSE_VALUE    ((uint32_t)8000000) /*!&lt; Value of the External oscillator in Hz */</div><div class="line"> #endif /* HSE_VALUE */</div><div class="line">#elif defined (STM32F412xG) || defined(STM32F413_423xx) || defined(STM32F446xx)</div><div class="line"> #if !defined  (HSE_VALUE)</div><div class="line">  #define HSE_VALUE    ((uint32_t)8000000) /*!&lt; Value of the External oscillator in Hz */</div><div class="line"> #endif /* HSE_VALUE */</div><div class="line">#endif /* STM32F40_41xxx || STM32F427_437xx || STM32F429_439xx || STM32F401xx || STM32F411xE || STM32F469_479xx */</div></pre></td></tr></table></figure></p>
-<p>然后倍频的系数设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">/************************* PLL Parameters *************************************/</div><div class="line">#if defined(STM32F40_41xxx) || defined(STM32F427_437xx) || defined(STM32F429_439xx) || defined(STM32F401xx) || defined(STM32F469_479xx)</div><div class="line"> /* PLL_VCO = (HSE_VALUE or HSI_VALUE / PLL_M) * PLL_N */</div><div class="line"> #define PLL_M      8//25  /******** 修改PLL_M系数，源文件中默认为25，因为ST默认使用25MHz晶振。修改为8分频是根据前面时钟树的配置进行修改 ********/</div><div class="line">#elif defined(STM32F412xG) || defined (STM32F446xx)</div><div class="line"> #define PLL_M      8</div><div class="line">#elif defined (STM32F410xx) || defined (STM32F411xE)</div><div class="line"> #if defined(USE_HSE_BYPASS)</div><div class="line">  #define PLL_M      8</div><div class="line"> #else /* !USE_HSE_BYPASS */</div><div class="line">  #define PLL_M      16</div><div class="line"> #endif /* USE_HSE_BYPASS */</div><div class="line">#else</div><div class="line">#endif /* STM32F40_41xxx || STM32F427_437xx || STM32F429_439xx || STM32F401xx || STM32F469_479xx */</div><div class="line"></div><div class="line">/* USB OTG FS, SDIO and RNG Clock =  PLL_VCO / PLLQ */</div><div class="line">#define PLL_Q      7</div><div class="line"></div><div class="line">#if defined(STM32F446xx)</div><div class="line">/* PLL division factor for I2S, SAI, SYSTEM and SPDIF: Clock =  PLL_VCO / PLLR */</div><div class="line">#define PLL_R      7</div><div class="line">#elif defined(STM32F412xG)</div><div class="line">#define PLL_R      2</div><div class="line">#else</div><div class="line">#endif /* STM32F446xx */</div><div class="line"></div><div class="line">#if defined(STM32F427_437xx) || defined(STM32F429_439xx) || defined(STM32F446xx) || defined(STM32F469_479xx)</div><div class="line">#define PLL_N      360</div><div class="line">/* SYSCLK = PLL_VCO / PLL_P */</div><div class="line">#define PLL_P      2</div><div class="line">#endif /* STM32F427_437x || STM32F429_439xx || STM32F446xx || STM32F469_479xx */</div><div class="line"></div><div class="line">#if defined (STM32F40_41xxx)</div><div class="line">#define PLL_N      336      /******** 修改PLL_N，根据前面时钟树的配置进行修改 ********/</div><div class="line">/* SYSCLK = PLL_VCO / PLL_P */</div><div class="line">#define PLL_P      2        /******** 修改PLL_P，根据前面时钟树的配置进行修改 ********/</div><div class="line">#endif /* STM32F40_41xxx */</div><div class="line"></div><div class="line">#if defined(STM32F401xx)</div><div class="line">#define PLL_N      336</div><div class="line">/* SYSCLK = PLL_VCO / PLL_P */</div><div class="line">#define PLL_P      4</div><div class="line">#endif /* STM32F401xx */</div><div class="line"></div><div class="line">#if defined(STM32F410xx) || defined(STM32F411xE) || defined(STM32F412xG)</div><div class="line">#define PLL_N      400</div><div class="line">/* SYSCLK = PLL_VCO / PLL_P */</div><div class="line">#define PLL_P      4</div><div class="line">#endif /* STM32F410xx || STM32F411xE */</div><div class="line"></div><div class="line">/******************************************************************************/</div></pre></td></tr></table></figure></p>
-<p>下面程序截取自system_stm32f4xx.c文件中设置时钟的函数，时钟初始化设置。<br>分频部分的系数设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">static void SetSysClock(void)</div><div class="line">&#123;</div><div class="line">#if defined(STM32F40_41xxx) || defined(STM32F427_437xx) || defined(STM32F429_439xx) || defined(STM32F401xx) || defined(STM32F412xG) || defined(STM32F446xx)|| defined(STM32F469_479xx)</div><div class="line">/******************************************************************************/</div><div class="line">/*            PLL (clocked by HSE) used as System clock source                */</div><div class="line">/******************************************************************************/</div><div class="line">  __IO uint32_t StartUpCounter = 0, HSEStatus = 0;</div><div class="line"></div><div class="line">  /* Enable HSE */</div><div class="line">  RCC-&gt;CR |= ((uint32_t)RCC_CR_HSEON);</div><div class="line"></div><div class="line">  /* Wait till HSE is ready and if Time out is reached exit */</div><div class="line">  do</div><div class="line">  &#123;</div><div class="line">    HSEStatus = RCC-&gt;CR &amp; RCC_CR_HSERDY;</div><div class="line">    StartUpCounter++;</div><div class="line">  &#125; while((HSEStatus == 0) &amp;&amp; (StartUpCounter != HSE_STARTUP_TIMEOUT));</div><div class="line"></div><div class="line">  if ((RCC-&gt;CR &amp; RCC_CR_HSERDY) != RESET)</div><div class="line">  &#123;</div><div class="line">    HSEStatus = (uint32_t)0x01;</div><div class="line">  &#125;</div><div class="line">  else</div><div class="line">  &#123;</div><div class="line">    HSEStatus = (uint32_t)0x00;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  if (HSEStatus == (uint32_t)0x01)</div><div class="line">  &#123;</div><div class="line">    /* Select regulator voltage output Scale 1 mode */</div><div class="line">    RCC-&gt;APB1ENR |= RCC_APB1ENR_PWREN;</div><div class="line">    PWR-&gt;CR |= PWR_CR_VOS;</div><div class="line"></div><div class="line">    /* HCLK = SYSCLK / 1*/</div><div class="line">    RCC-&gt;CFGR |= RCC_CFGR_HPRE_DIV1;        /******** AHB 分频，通过对sysclk分频后得到HCLK时钟频率，此处1分频 ********/</div><div class="line"></div><div class="line">#if defined(STM32F40_41xxx) || defined(STM32F427_437xx) || defined(STM32F429_439xx) ||  defined(STM32F412xG) || defined(STM32F446xx) || defined(STM32F469_479xx)</div><div class="line">    /* PCLK2 = HCLK / 2*/</div><div class="line">    RCC-&gt;CFGR |= RCC_CFGR_PPRE2_DIV8;//RCC_CFGR_PPRE2_DIV2;     /******** APB2 分频，通过对前面HCLK分频后得到，PCLK2时钟频率，默认2分频，根据前面时钟树配置为8分频 ********/</div><div class="line"></div><div class="line">    /* PCLK1 = HCLK / 4*/</div><div class="line">    RCC-&gt;CFGR |= RCC_CFGR_PPRE1_DIV4;//RCC_CFGR_PPRE1_DIV4;     /******** APB1 分频，通过对前面HCLK分频后得到，PCLK1时钟频率，默认4分频，根据前面时钟树配置为4分频不变 ********/</div><div class="line">#endif /* STM32F40_41xxx || STM32F427_437x || STM32F429_439xx  || STM32F412xG || STM32F446xx || STM32F469_479xx */</div></pre></td></tr></table></figure></p>
-<p>其实通过这样简单几步设置，时钟配置就完成了，各个部分的时钟如前面图片所示。接下来我们通过库函数来获取HCLK，PCLK1和PCLK2的时钟频率。<br>在函数库文件stm32f4xx_rcc.c中提供函数RCC_GetClocksFreq来获取SYSCLK，HCLK，PCLK1和PCLK2的时钟频率：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">RCC_ClocksTypeDef rcc_clock;   /* 结构体，成员就是4个时钟频率 */</div><div class="line"></div><div class="line">RCC_GetClocksFreq(&amp;rcc_clock);</div></pre></td></tr></table></figure></p>
-<p>通过串口将结构体成员的值打印出来，就可以很直观的知道各个外设的时钟频率了。<br>其实在函数库文件stm32f4xx_rcc.c中还有设置AHB，APB1和APB2分频系数的函数，这里不做介绍，具体请参考此文件。</p>
-<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>时钟配置的过程很简单，我觉得更重要的是熟悉STM32的时钟结构，各个外设使用的是哪个部分的时钟，这样才能在使用的时候少犯错，尤其是定时器，时钟错了，定时就错了，尴尬。<br>F1的系统时钟初始化这部分，跟F4差别挺大的，可能不适用，大致参考一下。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list">
 			 
         <li class="article-tag-list-item">
-        	<a href="javascript:void(0)" class="article-tag-list-link color1">STM32</a>
+        	<a href="javascript:void(0)" class="article-tag-list-link color4">STM32 FreeRTOS CLI</a>
         </li>
       
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http:https:/jungleeee.github.io.git/2017/09/22/stm32-clock/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/03/26/freertos-cli/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          STM32命令行调试工具 (FreeRTOS + CLI)
-        
-      </div>
-    </a>
   
   
-    <a href="/2017/09/19/stm32-timer-dma/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">STM32(Cortex-M4) 定时器-DMA WS2812-GRB-LED</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-
-  
-    <div class="duoshuo"></div>
+    </div></section>
   
 
-
+    
 
 
           </div>
@@ -307,8 +209,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
