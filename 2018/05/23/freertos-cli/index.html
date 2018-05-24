@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https:/jungleeee.github.io.git">
-  <title>Tag: VIM | Jungle&#39;s Blog</title>
+  <title>STM32命令行调试工具 (FreeRTOS + CLI) | Jungle&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jungle&#39;s Blog">
-<meta property="og:url" content="https:/jungleeee.github.io.git/tags/VIM/index.html">
+  <meta name="description" content="前言1学习、总计、交流、进步！ 测试环境为Keil 5.20 &amp;amp;&amp;amp; STM32F405ZET6 &amp;amp;&amp;amp; FreeRtos 10.0.0；晶振频率为12Mhz。串口工具使用的SecureCRT，波特率为115200。请根据实际情况修改后进行测试。 原创，转载请注明出处。  介绍在系统调试过此中，总是会有某些参数的临时修改，或者有时候调试需要临时打印一些信息，如果都需要重">
+<meta name="keywords" content="STM32,FreeRTOS,CLI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32命令行调试工具 (FreeRTOS + CLI)">
+<meta property="og:url" content="https:/jungleeee.github.io.git/2018/05/23/freertos-cli/index.html">
 <meta property="og:site_name" content="Jungle&#39;s Blog">
+<meta property="og:description" content="前言1学习、总计、交流、进步！ 测试环境为Keil 5.20 &amp;amp;&amp;amp; STM32F405ZET6 &amp;amp;&amp;amp; FreeRtos 10.0.0；晶振频率为12Mhz。串口工具使用的SecureCRT，波特率为115200。请根据实际情况修改后进行测试。 原创，转载请注明出处。  介绍在系统调试过此中，总是会有某些参数的临时修改，或者有时候调试需要临时打印一些信息，如果都需要重">
+<meta property="og:updated_time" content="2018-05-23T08:18:56.366Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jungle&#39;s Blog">
+<meta name="twitter:title" content="STM32命令行调试工具 (FreeRTOS + CLI)">
+<meta name="twitter:description" content="前言1学习、总计、交流、进步！ 测试环境为Keil 5.20 &amp;amp;&amp;amp; STM32F405ZET6 &amp;amp;&amp;amp; FreeRtos 10.0.0；晶振频率为12Mhz。串口工具使用的SecureCRT，波特率为115200。请根据实际情况修改后进行测试。 原创，转载请注明出处。  介绍在系统调试过此中，总是会有某些参数的临时修改，或者有时候调试需要临时打印一些信息，如果都需要重">
   
     <link rel="alternative" href="/atom.xml" title="Jungle&#39;s Blog" type="application/atom+xml">
   
@@ -133,60 +138,156 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-freertos-cli" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/14/vim-plug-in/" class="archive-article-date">
-  	<time datetime="2017-09-14T07:26:29.268Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-14</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/14/vim-plug-in/">vim 常用插件配置</a>
+    <h1 class="article-title" itemprop="name">
+      STM32命令行调试工具 (FreeRTOS + CLI)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/05/23/freertos-cli/" class="archive-article-date">
+  	<time datetime="2018-05-23T08:18:56.374Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">学习、总计、交流、进步！</div></pre></td></tr></table></figure>
+<p>测试环境为Keil 5.20 &amp;&amp; STM32F405ZET6 &amp;&amp; FreeRtos 10.0.0；晶振频率为12Mhz。<br>串口工具使用的SecureCRT，波特率为115200。<br>请根据实际情况修改后进行测试。</p>
+<p>原创，转载请注明出处。</p>
+<hr>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>在系统调试过此中，总是会有某些参数的临时修改，或者有时候调试需要临时打印一些信息，如果都需要重新修改代码、编译、下载这样一个过程就会显得十分麻烦。<br>而通过CLI接口，就可以通过调用程序中的接口去修改一些参数，或者临时打开一些预置的调试打印，避免反复修改程序的麻烦和偶尔粗心大意造成的修改不全面。<br>当然还可以通过一些控制接口，直接实现一些控制，方便调试。总之而言，CLI很大程度方便了程序调试过程。<br>FreeRTOS系统后续不做介绍，作者只是选择了一个系统平台来实现和展示CLI工具。<br>更新了基于UcOSIII的CLI(2018.4.2, STM32F4), 队列、信号量的实现方式不同于FreeRTOS，所以差异还是比较明显，可以一起看看。<br><a id="more"></a></p>
+<hr>
+<h3 id="CLI"><a href="#CLI" class="headerlink" title="CLI"></a>CLI</h3><p>FreeRTOS官网提供CLI的例程，作者自写CLI之前很认真的阅读过源码，并且有实际使用。但在使用过程中发现一点小小的不方便，于是便自己尝试修改，并于分享。<br>作者在使用FreeRTOS提供的CLI过程中，发现当系统中要使用的调试命令太多时，输入’help’后出现一大串命令介绍，你需要在这一大串命令中去找要使用的命令的使用格式，很麻烦。<br>所以在修改后实现了二级命令菜单，可以通过某些属性，将命令简单分类，原因之一。<br>另一原因是，大多数人在打印调试信息时，都会使用重新映射的’printf’，而它的执行过程是一直阻塞直到全部发送完成，当调式信息过多时，就会影响系统的实时性。<br>因此作者想要通过串口的DMA来完成调试信息的打印，而不使用前一种方式，其次为系统提供统一可控制的打印接口，可以随意开启/关闭某一分类的调试打印输出。</p>
+<p>实现的源码在目录_Code/_APP下，源码很简单，就不做流程介绍了。主要说明几点注意事项(Notice)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">1、usart.c: line: 127-129:</div><div class="line">    DMA_Cmd(..., DISABLE);//must disable</div><div class="line"></div><div class="line">2、common.h: line 28-37, bit-field(位域)，baidu or google。</div><div class="line">    if you need to add one bit, please reduce one bit on &apos;OTHER&apos;</div><div class="line"></div><div class="line">3、about submenu, please refer to the template in the file cli_register.c</div><div class="line"></div><div class="line">4、The critical area problem is not considered in the program, and it is not recommended to use in interrupts, and high frequency is not recommended.</div><div class="line"></div><div class="line">5、Provide the program under the ucos system.</div><div class="line"></div><div class="line">6、Use caution if you don&apos;t do a lot of testing.</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/jungleeee/FreeRTOS-CLI" target="_blank" rel="external">源码链接</a></p>
+<hr>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>1、<a href="https://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_CLI/Download_FreeRTOS_Plus_CLI.shtml" target="_blank" rel="external">FreeRTOS+CLI</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list">
 			 
         <li class="article-tag-list-item">
-        	<a href="javascript:void(0)" class="article-tag-list-link color4">VIM</a>
+        	<a href="javascript:void(0)" class="article-tag-list-link color1">STM32</a>
+        </li>
+       
+        <li class="article-tag-list-item">
+        	<a href="javascript:void(0)" class="article-tag-list-link color4">FreeRTOS</a>
+        </li>
+       
+        <li class="article-tag-list-item">
+        	<a href="javascript:void(0)" class="article-tag-list-link color4">CLI</a>
         </li>
       
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http:https:/jungleeee.github.io.git/2018/05/23/freertos-cli/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/05/24/lwip/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Lwip 2.0.3 移植(FreeRTOS + CLI)
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/09/22/stm32-clock/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">STM32(Cortex-M4) 时钟配置</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-    
+
 
 
           </div>
@@ -209,9 +310,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		root: "/",
