@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https:/jungleeee.github.io.git">
-  <title>Tag: STM32 | Jungle&#39;s Blog</title>
+  <title>Lwip 2.0.3 移植(FreeRTOS + CLI) | Jungle&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jungle&#39;s Blog">
-<meta property="og:url" content="https:/jungleeee.github.io.git/tags/STM32/index.html">
+  <meta name="description" content="前言1学习、总结、交流、进步！ 测试环境为Keil 5.20 &amp;amp;&amp;amp; STM32F407ZET6 &amp;amp;&amp;amp; FreeRtos 10.0.0 &amp;amp;&amp;amp; Lwip 2.0.3 &amp;amp;&amp;amp; DP83848；晶振频率为8Mhz。请根据实际情况修改后进行测试。 原创，转载请注明出处。  介绍主要介绍Lwip 2.0.3 的移植过程。 作者对Lwip的认识一点也">
+<meta name="keywords" content="STM32,FreeRTOS,CLI,LWIP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lwip 2.0.3 移植(FreeRTOS + CLI)">
+<meta property="og:url" content="https:/jungleeee.github.io.git/2018/12/06/lwip/index.html">
 <meta property="og:site_name" content="Jungle&#39;s Blog">
+<meta property="og:description" content="前言1学习、总结、交流、进步！ 测试环境为Keil 5.20 &amp;amp;&amp;amp; STM32F407ZET6 &amp;amp;&amp;amp; FreeRtos 10.0.0 &amp;amp;&amp;amp; Lwip 2.0.3 &amp;amp;&amp;amp; DP83848；晶振频率为8Mhz。请根据实际情况修改后进行测试。 原创，转载请注明出处。  介绍主要介绍Lwip 2.0.3 的移植过程。 作者对Lwip的认识一点也">
+<meta property="og:image" content="https:/picture/img/lwip/1_lwip.png">
+<meta property="og:updated_time" content="2018-12-06T06:43:50.280Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jungle&#39;s Blog">
+<meta name="twitter:title" content="Lwip 2.0.3 移植(FreeRTOS + CLI)">
+<meta name="twitter:description" content="前言1学习、总结、交流、进步！ 测试环境为Keil 5.20 &amp;amp;&amp;amp; STM32F407ZET6 &amp;amp;&amp;amp; FreeRtos 10.0.0 &amp;amp;&amp;amp; Lwip 2.0.3 &amp;amp;&amp;amp; DP83848；晶振频率为8Mhz。请根据实际情况修改后进行测试。 原创，转载请注明出处。  介绍主要介绍Lwip 2.0.3 的移植过程。 作者对Lwip的认识一点也">
+<meta name="twitter:image" content="https:/picture/img/lwip/1_lwip.png">
   
     <link rel="alternative" href="/atom.xml" title="Jungle&#39;s Blog" type="application/atom+xml">
   
@@ -133,36 +140,69 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-lwip" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/06/lwip/" class="archive-article-date">
-  	<time datetime="2018-12-06T06:43:50.284Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/06/lwip/">Lwip 2.0.3 移植(FreeRTOS + CLI)</a>
+    <h1 class="article-title" itemprop="name">
+      Lwip 2.0.3 移植(FreeRTOS + CLI)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/12/06/lwip/" class="archive-article-date">
+  	<time datetime="2018-12-06T06:43:50.284Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">学习、总结、交流、进步！</div></pre></td></tr></table></figure>
+<p>测试环境为Keil 5.20 &amp;&amp; STM32F407ZET6 &amp;&amp; FreeRtos 10.0.0 &amp;&amp; Lwip 2.0.3 &amp;&amp; DP83848；晶振频率为8Mhz。<br>请根据实际情况修改后进行测试。</p>
+<p>原创，转载请注明出处。</p>
+<hr>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>主要介绍Lwip 2.0.3 的移植过程。</p>
+<p>作者对Lwip的认识一点也不深刻，只能简单的记录移植过程中主要的修改位置。方便其他需要使用此协议栈的小伙伴。</p>
+<p>在移植开始之前需要下载Lwip最新源码包，以及STM32官方提供的基于STM32F407 &amp;&amp; FreeRTOS &amp;&amp; lwip 1.4.1 &amp;&amp; DP83848 的例程源码。<br>获取方式如下：<br>1、Lwip 直接百度，下载需要的版本。<br>2、百度STSW—STM32070，下载此源码包。</p>
+<a id="more"></a>
+<hr>
+<h3 id="FIRST"><a href="#FIRST" class="headerlink" title="FIRST"></a>FIRST</h3><p>将上述两个源码包解压。<br>Lwip目录下主要包括<code>doc、src、test</code>三个文件夹，以及一些其他文件（不重要）。所有源文件都在<code>src</code>文件夹下。<br>可以直接将lwip整个文件夹直接放到工程目录下。</p>
+<p>然后是ST官方的移植例程。<br>解压后在目录:<code>STM32F4x7_ETH_LwIP_V1.1.1\Libraries</code>下，请把<code>STM32F4x7_ETH_Driver</code>文件夹移到工程相关目录下。<br>然后在<code>STM32F4x7_ETH_Driver\inc</code>目录下存在<code>stm32f4x7_eth.h</code>和<code>stm32f4x7_eth_conf_template.h</code>两个文件，打开<code>stm32f4x7_eth.h</code>可以看到有包含头文件<code>#include &quot;stm32f4x7_eth_conf.h&quot;</code>，此处我选择直接将另一个.h文件直接重命名为<code>stm32f4x7_eth_conf.h</code>。<br>此时目录下存在<code>stm32f4x7_eth.h</code>和<code>stm32f4x7_eth_conf.h</code>两个文件。<br>对<code>stm32f4x7_eth_conf.h</code>文件进行如下修改:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">line 60: #define CUSTOM_DRIVER_BUFFERS_CONFIG   //取消注释，允许使用自定义的网络接收/发送的数据缓冲区大小。</div><div class="line"></div><div class="line">//此处使用系统较为精确的延时，函数原型如下，请在适当位置进行定义：</div><div class="line">//void Delay(uint32_t ms)</div><div class="line">//&#123;</div><div class="line">//  vTaskDelay(ms);//由于使用的FreeRTOS系统，使用系统延时。</div><div class="line">//&#125;</div><div class="line">line 51: extern void Delay(uint32_t ms);/* Header file where the Delay function prototype is exported */</div><div class="line"></div><div class="line">//在允许使用自定义收发缓存大小后，请根据实际网络收发数据量的大小定义此处大小。</div><div class="line">line 66: #define ETH_RXBUFNB        4                    /* 4 Rx buffers of size ETH_RX_BUF_SIZE */</div><div class="line">line 67: #define ETH_TXBUFNB        4                    /* 4 Tx buffers of size ETH_TX_BUF_SIZE */</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="SECOND"><a href="#SECOND" class="headerlink" title="SECOND"></a>SECOND</h3><p>在工程目录下的lwip文件夹下创建<code>arch</code>文件夹，用来存放其他文件。<br>ST官方例程目录<code>STM32F4x7_ETH_LwIP_V1.1.1\Utilities\Third_Party\lwip-1.4.1\port</code>下，是针对于f4x7系列写的相关程序（具体作用还未详细了解）。<br>接下来把部分源文件复制到新建的<code>arch</code>文件夹中，因为使用了FreeRTOS系统，所以需要注意选择<code>FreeRTOS</code>目录下的文件：<br>1、把<code>STM32F4x7_ETH_LwIP_V1.1.1\Utilities\Third_Party\lwip-1.4.1\port\STM32F4x7\arch</code>目录下<code>cc.h cpu.h perf.h</code>三个文件。<br>2、把<code>STM32F4x7_ETH_LwIP_V1.1.1\Utilities\Third_Party\lwip-1.4.1\port\STM32F4x7\FreeRTOS</code>目录下全部四个文件。<br>3、把<code>STM32F4x7_ETH_LwIP_V1.1.1\Project\FreeRTOS\httpserver_socketi\inc</code>目录下<code>lwipopts.h</code>一个文件。<br>总共8个文件复制到新建<code>arch</code>目录下。</p>
+<p>还需要将目录<code>STM32F4x7_ETH_LwIP_V1.1.1\Project\FreeRTOS\httpserver_socket\src</code>下<code>stm32f4x7_eth_bsp.c</code><br>以及目录<code>STM32F4x7_ETH_LwIP_V1.1.1\Project\FreeRTOS\httpserver_socket\inc</code>下<code>stm32f4x7_eth_bsp.h</code><br>复制到工程相关目录下。作如下修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">文件不要随意改变，不然行数对不上。</div><div class="line">1、`stm32f4x7_eth_bsp.h`:</div><div class="line">    line 38-48 注释掉。</div><div class="line">    line 74-78 注释掉。</div><div class="line">    添加宏定义：#define RMII_MODE //use MII，因为我这里硬件使用的时MII接口，根据硬件接口情况定义使用MII或者RMII。</div><div class="line">2、`stm32f4x7_eth_bsp.c`:</div><div class="line">    line 32 注释掉：#include &quot;main.h&quot;</div><div class="line">    lin3 34 #include &quot;netconf.h&quot;修改为#include &quot;ethernetif.h&quot;</div><div class="line">    line 81-101 注释掉。这里定义和创建网线链接检测的认为，我硬件上无此设计，所以注释掉，不使用。</div><div class="line">    line 132-133 源文件是注释掉的，取消注释。</div><div class="line">    line 294-556 全部注释掉。这里配置网线链接的硬件IO。</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="THIRD"><a href="#THIRD" class="headerlink" title="THIRD"></a>THIRD</h3><p>按下图将文件相应文件添加到工程中(这里需要注意：源文件<code>ethernetif.c</code>、<code>sys_arch.c</code> 在前面创建的文件夹<code>arch</code>下)：<br><img src="/picture/img/lwip/1_lwip.png" alt="1_lwip"></p>
+<p>此时如果进行编译的话，会出现较多警告和错误，下面进行一一处理（情况不一定完全一样，这里解决我出现的现象）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">1、 error:  #256: invalid redeclaration of type name &quot;u32_t&quot; (declared at line 41 of &quot;..\..\_Code\LWIP\arch/cc.h&quot;)</div><div class="line">这里在`arch.h`和`cc.h`两个文件中出现了重复定义。</div><div class="line">请将`arch.h` - `line 113` - `#define LWIP_NO_STDINT_H 0` - 定义为1：`#define LWIP_NO_STDINT_H 1`</div><div class="line">2、 error directive: &quot;LWIP_COMPAT_MUTEX cannot prevent priority inversion. It is recommended to implement priority-aware mutexes. (Define LWIP_COMPAT_MUTEX_ALLOWED to disable this error.)&quot;</div><div class="line">请在`lwipopts.h`文件中添加：`#define LWIP_COMPAT_MUTEX_ALLOWED       0`</div><div class="line">3、 error:  #5: cannot open source input file &quot;lwip/timers.h&quot;: No such file or directory</div><div class="line">请注释掉`ethernetif.c`中`#include &quot;lwip/timers.h&quot;`，同时注释掉`#include &quot;main.h&quot;`，这是例程中有相关的定义，这里重新定义，所以注释掉。</div><div class="line">注释掉后，就会出现信号量声明未定义的错误，需要添加相应头文件：</div><div class="line">`#include &quot;FreeRTOS.h&quot;</div><div class="line"> #include &quot;task.h&quot;</div><div class="line"> #include &quot;semphr.h&quot;`</div><div class="line">然后会出现MAC地址未定义的错误，这里直接将宏定义修改为数字就可以解决了。</div><div class="line">在MAX地址初始化下面位置，设置`netif-&gt;flags = NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP;`的位置请添加`NETIF_FLAG_LINK_UP`，为`netif-&gt;flags = NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP | NETIF_FLAG_LINK_UP;`，否则网络无法连接。</div><div class="line">4、 warning:  #223-D: function &quot;sys_timeout&quot; declared implicitly</div><div class="line">直接注释，不使用。</div><div class="line">5、 warning:  #177-D: function &quot;arp_timer&quot; was declared but never referenced</div><div class="line">直接注释，不使用。</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="FOURTH"><a href="#FOURTH" class="headerlink" title="FOURTH"></a>FOURTH</h3><p>理论上应该没有什么编译警告和错误了。<br>然后因为ST官方例程中使用的网络的DMA进行收发控制，所以还需构造网络中断函数，实际上在例程的<code>stm32f4xx_it.c</code>文件中有。为了不进行信号量的外部声明，我把中断函数直接放到了<code>ethernetif.c</code>中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">void ETH_IRQHandler(void)</div><div class="line">&#123;</div><div class="line">    portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;</div><div class="line"></div><div class="line">    // Frame received</div><div class="line">    if ( ETH_GetDMAFlagStatus(ETH_DMA_FLAG_R) == SET)</div><div class="line">    &#123;</div><div class="line">        // Give the semaphore to wakeup LwIP task</div><div class="line">        xSemaphoreGiveFromISR( s_xSemaphore, &amp;xHigherPriorityTaskWoken );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Clear the interrupt flags.</div><div class="line">    // Clear the Eth DMA Rx IT pending bits</div><div class="line">    ETH_DMAClearITPendingBit(ETH_DMA_IT_R);</div><div class="line">    ETH_DMAClearITPendingBit(ETH_DMA_IT_NIS);</div><div class="line"></div><div class="line">    // Switch tasks if necessary.</div><div class="line">    if( xHigherPriorityTaskWoken != pdFALSE )</div><div class="line">    &#123;</div><div class="line">        portEND_SWITCHING_ISR( xHigherPriorityTaskWoken );</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="FIFTH"><a href="#FIFTH" class="headerlink" title="FIFTH"></a>FIFTH</h3><p>到此整个工程文件移植完成，接下来构造进行初始化函数。如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div></pre></td><td class="code"><pre><div class="line">/* Inlcude ---------------------------------------------------------------------*/</div><div class="line">#include &quot;stdio.h&quot;</div><div class="line">#include &quot;stdint.h&quot;</div><div class="line">#include &quot;string.h&quot;</div><div class="line"></div><div class="line">#include &quot;tcpip.h&quot;</div><div class="line">#include &quot;ethernetif.h&quot;</div><div class="line">#include &quot;stm32f4x7_eth_bsp.h&quot;</div><div class="line"></div><div class="line">#include &lt;lwip/sockets.h&gt;</div><div class="line">#include &lt;lwip/err.h&gt;</div><div class="line">#include &lt;lwip/sys.h&gt;</div><div class="line"></div><div class="line">/** @addtogroup Cli_Project</div><div class="line">  * @&#123;</div><div class="line">  */</div><div class="line">/* Private typedef -------------------------------------------------------------*/</div><div class="line">/* Private constants define ----------------------------------------------------*/</div><div class="line">/* Static IP ADDRESS */</div><div class="line">#define IP_ADDR0        192</div><div class="line">#define IP_ADDR1        168</div><div class="line">#define IP_ADDR2        11</div><div class="line">#define IP_ADDR3        241</div><div class="line"></div><div class="line">/* NETMASK */</div><div class="line">#define NETMASK_ADDR0   255</div><div class="line">#define NETMASK_ADDR1   255</div><div class="line">#define NETMASK_ADDR2   255</div><div class="line">#define NETMASK_ADDR3   0</div><div class="line"></div><div class="line">/* Gateway Address */</div><div class="line">#define GW_ADDR0        192</div><div class="line">#define GW_ADDR1        168</div><div class="line">#define GW_ADDR2        11</div><div class="line">#define GW_ADDR3        1</div><div class="line"></div><div class="line">/* Private macro define --------------------------------------------------------*/</div><div class="line">/* Private variables -----------------------------------------------------------*/</div><div class="line">struct netif xnetif;</div><div class="line"></div><div class="line">/* Private function declaration ------------------------------------------------*/</div><div class="line">/* Private functions -----------------------------------------------------------*/</div><div class="line">/**</div><div class="line">  * @brief  Initializes the lwIP stack</div><div class="line">  * @param  None</div><div class="line">  * @retval None</div><div class="line">  */</div><div class="line">void network_lwip_init(void)</div><div class="line">&#123;</div><div class="line">    struct ip4_addr ipaddr;</div><div class="line">    struct ip4_addr netmask;</div><div class="line">    struct ip4_addr gw;</div><div class="line"></div><div class="line">#ifndef USE_DHCP</div><div class="line">//    uint8_t iptab[4] = &#123;0&#125;;</div><div class="line">//    uint8_t iptxt[20];</div><div class="line">#endif</div><div class="line"></div><div class="line">    /* Create tcp_ip stack thread */</div><div class="line">    tcpip_init( NULL, NULL );</div><div class="line"></div><div class="line">    /* IP address setting */</div><div class="line">#ifdef USE_DHCP</div><div class="line">    ipaddr.addr = 0;</div><div class="line">    netmask.addr = 0;</div><div class="line">    gw.addr = 0;</div><div class="line">#else</div><div class="line">    IP4_ADDR(&amp;ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);</div><div class="line">    IP4_ADDR(&amp;netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);</div><div class="line">    IP4_ADDR(&amp;gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);</div><div class="line">#endif</div><div class="line"></div><div class="line">    /* - netif_add(struct netif *netif, struct ip_addr *ipaddr,</div><div class="line">    struct ip_addr *netmask, struct ip_addr *gw,</div><div class="line">    void *state, err_t (* init)(struct netif *netif),</div><div class="line">    err_t (* input)(struct pbuf *p, struct netif *netif))</div><div class="line"></div><div class="line">    Adds your network interface to the netif_list. Allocate a struct</div><div class="line">    netif and pass a pointer to this structure as the first argument.</div><div class="line">    Give pointers to cleared ip_addr structures when using DHCP,</div><div class="line">    or fill them with sane numbers otherwise. The state pointer may be NULL.</div><div class="line"></div><div class="line">    The init function pointer must point to a initialization function for</div><div class="line">    your ethernet netif interface. The following code illustrates it&apos;s use.*/</div><div class="line"></div><div class="line">    netif_add(&amp;xnetif, &amp;ipaddr, &amp;netmask, &amp;gw, NULL, ethernetif_init, tcpip_input);</div><div class="line"></div><div class="line">    /*  Registers the default network interface.*/</div><div class="line">    netif_set_default(&amp;xnetif);</div><div class="line"></div><div class="line">    /* When the netif is fully configured this function must be called.*/</div><div class="line">    netif_set_up(&amp;xnetif);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line">  * @brief  :</div><div class="line">  * @param  : None</div><div class="line">  * @retval : None</div><div class="line">  */</div><div class="line">void network_init(void)</div><div class="line">&#123;</div><div class="line">    /* configure ethernet (GPIOs, clocks, MAC, DMA) */</div><div class="line">    ETH_BSP_Config();//这个函数在stm32f4x7_eth_bsp.c 中定义</div><div class="line"></div><div class="line">    network_lwip_init();//这个函数也就是上文定义的函数，源码在ST官方工程中的main.c文件中，main函数中的`LwIP_Init()`函数便是，我这里只使用了前面一部分。具体查看原函数。</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>把<code>network_init()</code>添加到初始化中去。进行调测。<br>可以通过ping IP 地址简单验证网络是否连通。然后在建立TCP SERVER，可以用SecureCRT连接，验证数据收发。</p>
+<hr>
+<h3 id="NOTICE"><a href="#NOTICE" class="headerlink" title="NOTICE"></a>NOTICE</h3><pre><code>1、我在调试过程中，出现了初始化一切正常，但ping IP 地址始终ping不通。后来调试发现初始化过程中有bug：
+在`stm32f4x7_eth.c`文件`ETH_Init`函数中，以下代码
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">do</div><div class="line">&#123;</div><div class="line">    timeout++;</div><div class="line">&#125; while (!(ETH_ReadPHYRegister(PHYAddress, PHY_BSR) &amp; PHY_Linked_Status) &amp;&amp; (timeout &lt; PHY_READ_TO));</div></pre></td></tr></table></figure>
+<pre><code>函数 ETH_ReadPHYRegister(PHYAddress, PHY_BSR)前几次获取的值为0x0000ffff，导致此处初始化通过，实际该值并不正确（可以通过打印该值看现象）。
+所以我把此处修改为(总共有三处，只修改可第一处位置)：
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">int get_PHY_Linked_Status = 0;</div><div class="line">do</div><div class="line">&#123;</div><div class="line">    get_PHY_Linked_Status = ETH_ReadPHYRegister(PHYAddress, PHY_BSR);</div><div class="line">    //printf(&quot;******* 0x%08x. \r\n&quot;, get_PHY_Linked_Status);</div><div class="line">    get_PHY_Linked_Status = ((get_PHY_Linked_Status == 0x0000ffff) ? 0 : get_PHY_Linked_Status);</div><div class="line">    timeout++;</div><div class="line">&#125; while (!(get_PHY_Linked_Status &amp; PHY_Linked_Status) &amp;&amp; (timeout &lt; PHY_READ_TO));</div></pre></td></tr></table></figure>
+<pre><code>但此处还存在一个bug，就是如果网线未插，这一直会停在此处，所以请务必注意，进行优化处理。
+</code></pre><p><a href="https://github.com/jungleeee/FreeRTOS-CLI" target="_blank" rel="external">源码链接</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list">
@@ -186,151 +226,97 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http:https:/jungleeee.github.io.git/2018/12/06/lwip/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/06/freertos-cli/" class="archive-article-date">
-  	<time datetime="2018-12-06T06:42:25.086Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/06/freertos-cli/">STM32命令行调试工具 (FreeRTOS + CLI)</a>
-    </h1>
+    <a href="/2018/12/06/freertos-roslib/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          STM32命令行调试工具 (FreeRTOS + CLI)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/06/freertos-cli/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">STM32命令行调试工具 (FreeRTOS + CLI)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list">
-			 
-        <li class="article-tag-list-item">
-        	<a href="javascript:void(0)" class="article-tag-list-link color1">STM32</a>
-        </li>
-       
-        <li class="article-tag-list-item">
-        	<a href="javascript:void(0)" class="article-tag-list-link color4">FreeRTOS</a>
-        </li>
-       
-        <li class="article-tag-list-item">
-        	<a href="javascript:void(0)" class="article-tag-list-link color4">CLI</a>
-        </li>
-      
-		</ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/22/stm32-clock/" class="archive-article-date">
-  	<time datetime="2017-09-22T03:18:51.462Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/22/stm32-clock/">STM32(Cortex-M4) 时钟配置</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list">
-			 
-        <li class="article-tag-list-item">
-        	<a href="javascript:void(0)" class="article-tag-list-link color1">STM32</a>
-        </li>
-      
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/19/stm32-timer-dma/" class="archive-article-date">
-  	<time datetime="2017-09-19T06:45:34.788Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/19/stm32-timer-dma/">STM32(Cortex-M4) 定时器-DMA WS2812-GRB-LED</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list">
-			 
-        <li class="article-tag-list-item">
-        	<a href="javascript:void(0)" class="article-tag-list-link color1">STM32</a>
-        </li>
-      
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -353,9 +339,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		root: "/",
